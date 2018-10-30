@@ -1,13 +1,15 @@
-console.log('js test')
 $(function(){
 	console.log('jquery test')
 
+$('.currency').mask('000,000,000', {reverse: true});
 
 
-$('#deposit').on('input',function(){
-	var purchasePrice = $('#purchase-price').val()
-	var deposit = $('#deposit').val()
+//Calculate Loan Amount
+$('#deposit, #purchase-price').on('input',function(){
+	var purchasePrice = $('#purchase-price').val().replace(/,/g, '');
 
+
+	var deposit = $('#deposit').val().replace(/,/g, '');
 
 	$('.loan-amount').html(purchasePrice-deposit)
 })

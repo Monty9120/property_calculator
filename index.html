@@ -17,50 +17,98 @@
 
         <div class="pure-control-group">
             <label for="property-value">Property Value</label>
-            <input id="property-value" type="number" placeholder="e.g $200,000">
+            <input class="currency" id="property-value" type="text" placeholder="$200,000">
         </div>
            <div class="pure-control-group">
             <label for="purchase-price">Purchase Price </label>
-            <input id="purchase-price" type="number" placeholder="e.g $200,000">
+            <input class="currency" id="purchase-price" type="text" placeholder="$200,000">
         </div>
 
 
         <div class="pure-control-group">
             <label for="deposit">Deposit</label>
-            <input id="deposit" type="number" placeholder="e.g $80,000">
+            <input class="currency" id="deposit" type="text" placeholder="$80,000"><i>$</i>
+            
         </div>
 
-		<h2>Loan amount: $<span class="loan-amount">100</span></h2>
+		<h2 class="loan">Loan amount: $<span class="loan-amount">100</span></h2>
 
      
         <div class="pure-control-group">
-            <label for="purchase-price">Purchase Price </label>
-            <input id="purchase-price" type="number" placeholder="e.g $200,000">
-        </div>
-
-        <div class="pure-control-group">
-            <label for="purchase-price">Purchase Price </label>
-            <input id="purchase-price" type="number" placeholder="e.g $200,000">
-        </div>
-
-        <div class="pure-control-group">
-            <label for="purchase-price">Purchase Price </label>
-            <input id="purchase-price" type="number" placeholder="e.g $200,000">
-        </div>
-
-
-        <div class="pure-controls">
-            <label for="cb" class="pure-checkbox">
-                <input id="cb" type="checkbox"> I've read the terms and conditions
-            </label>
-
-            <button type="submit" class="pure-button pure-button-primary">Submit</button>
+            <label for="capital-costs">Capital Costs</label>
+            <input class="currency" id="capital-costs" type="text" placeholder="$0">
         </div>
     </fieldset>
+
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="rates">Rates</label>
+            <input class="currency" id="rates" type="text" placeholder="$800">pa
+        </div>
+
+        <div class="pure-control-group">
+            <label for="body-corporate">Body Coporate</label>
+            <input class="currency" id="body-corporate" type="text" placeholder="$0">pa
+        </div>
+		
+		<div class="pure-control-group">
+            <label for="insurance">Insurance</label>
+            <input class="currency" id="insurance" type="text" placeholder="$300">pa
+        </div>
+
+        <div class="pure-control-group">
+            <label for="rates">Rates</label>
+            <input class="currency" id="rates" type="text" placeholder="$800">pa
+        </div>
+
+        <div class="pure-control-group">
+            <label for="maintenance-underten">Maintenance (<10 years)</label>
+            <input id="maintenance-underten" type="" placeholder="%5">pa
+        </div>
+
+        <div class="pure-control-group">
+            <label for="maintenance-overten">Maintenance (>10 years)</label>
+            <input id="maintenance-overten" type="" placeholder="%5">pa
+        </div>
+
+        <div class="pure-control-group">
+            <label for="water">Water</label>
+            <input id="water" type="text" placeholder="$0">pa
+        </div>
+
+	</fieldset>
+
+	<fieldset>
+		<div class="pure-control-group">
+            <label for="annual-interest-rate">Annual Interest Rate</label>
+            <input id="annual-interest-rate" type="text" placeholder="7">%
+        </div>
+        <div class="pure-control-group">
+            <label for="loan-term">Loan Term (years)</label>
+            <input id="loan-term" type="text" placeholder="25">
+        </div>
+	</fieldset>
+
+	<fieldset>
+		<div class="pure-control-group">
+            <label for="rental-income">Rental Income</label>
+            <input id="rental-income" type="text" placeholder="$300">
+        </div>
+        <div class="pure-control-group">
+            <label for="property-management">Property Management</label>
+            <input id="property-management" type="text" placeholder="8.50">%
+        </div>
+        <div class="pure-control-group">
+            <label for="water">Water</label>
+            <input id="water" type="text" placeholder="$0">weeks
+        </div>
+	</fieldset>
+    
 </form>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="jQuery-Mask/dist/jquery.mask.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

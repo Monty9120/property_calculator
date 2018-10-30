@@ -1,0 +1,31 @@
+fieldset{
+	
+}
+
+i{
+	position: absolute;
+	right: -50;
+	top: 0;
+}
+.pure-control-group label{
+	position: relative;
+}
+
+.loan{
+	text-align: center;
+}
+.pure-form {
+	width: 50%;
+	margin: auto;
+}
+
+.pure-form fieldset{
+	border:1px black solid !important;
+	margin: 1em !important;
+}
+
+
+.pure-form-aligned .pure-control-group label{
+	text-align: left;
+
+}
