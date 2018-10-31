@@ -10,6 +10,7 @@ i{
 tr, td{
 	border:1px black solid;
 }
+
 #refresh{
 	background-color: lightgreen;
 	/*color: white;*/
@@ -22,6 +23,7 @@ tr, td{
 	display: flex;
 	justify-content: center;
 }
+
 .wrap{
 	display: flex;
 	justify-content: space-between;
@@ -54,5 +56,6 @@ tr, td{
 /*results*/
 .table-heading{
 	font-weight: bold;
+
 	background-color: yellow;
 }
