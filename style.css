@@ -4,19 +4,27 @@ fieldset{
 
 i{
 	position: absolute;
-	right: -50;
+	left:100px;
 	top: 0;
 }
-.pure-control-group label{
-	position: relative;
+tr, td{
+	border:1px black solid;
+}
+.wrap{
+	display: flex;
+	justify-content: space-between;
+	margin-right: 5%;
+}
+.pure-control-group{
+	/*position: relative;*/
 }
 
 .loan{
-	text-align: center;
+	margin-left: 2em;
 }
 .pure-form {
-	width: 50%;
-	margin: auto;
+	width: 30%;
+
 }
 
 .pure-form fieldset{
@@ -28,4 +36,10 @@ i{
 .pure-form-aligned .pure-control-group label{
 	text-align: left;
 
+}
+
+
+/*results*/
+.table-heading{
+	font-weight: bold;
 }

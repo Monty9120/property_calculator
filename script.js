@@ -12,7 +12,15 @@ $('#deposit, #purchase-price').on('input',function(){
 	var deposit = $('#deposit').val().replace(/,/g, '');
 
 	$('.loan-amount').html(purchasePrice-deposit)
+});
+
+//Calculate Loan Amount
+$('#rental-income').on('input',function(){
+	var rentalIncome = $('#rental-income').val().replace(/,/g, '');
+
+	$('.r-weekly-rent').html(rentalIncome)
 })
+
 
 
 	
