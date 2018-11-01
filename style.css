@@ -2,6 +2,10 @@ fieldset{
 	
 }
 
+h1{
+	margin: 0;
+}
+
 i{
 	position: absolute;
 	left:100px;

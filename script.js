@@ -2,13 +2,17 @@ $(function(){
 	console.log('jquery test')
 
 
-$('.currency').mask('000,000,000', {reverse: true});
+$('.currency').mask('000,000,000', {reverse: false});
 
-$('#refresh').on('click',function(){
+$('#purchase-price, #deposit').on('input',function(){
 	//Calculate Loan Amount
 	var purchasePrice = $('#purchase-price').val().replace(/,/g, '');
 	var deposit = $('#deposit').val().replace(/,/g, '');
 	$('.loan-amount').html(purchasePrice-deposit)
+
+});
+
+$('#refresh').on('click',function(){
 
 	//Calculate Rental Income
 	var rentalIncome = $('#rental-income').val().replace(/,/g, '');
@@ -18,6 +22,7 @@ $('#refresh').on('click',function(){
 
 	//Calculate annual rent and
 	//Calculate property managemnet
+	var purchasePrice = $('#purchase-price').val().replace(/,/g, '');
 	var annualVaccancy = $('#annual-vaccancy').val()
 	var rentalIncome = $('#rental-income').val().replace(/,/g, '');
 	$('.r-annual-rent').html(rentalIncome*(52-annualVaccancy));
