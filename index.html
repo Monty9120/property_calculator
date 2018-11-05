@@ -139,29 +139,10 @@
 
 	</fieldset>
 
-	<fieldset>
-		<div class="pure-control-group">
-            <label for="capital-growth">Capital Growth</label>
-            <input id="capital-growth" type="text" placeholder="4.6">% pa
-        </div>
-        <div class="pure-control-group">
-            <label for="rental-increase">Rental Increase</label>
-            <input id="rental-increase" type="text" placeholder="3">% pa
-        </div>
-        <div class="pure-control-group">
-            <label for="cost-increases">Cost Increases</label>
-            <input id="cost-increases" type="text" placeholder="3">%
-        </div>
-        <div class="pure-control-group">
-            <label for="marginal-tax-rate">Marginal Tax Rate</label>
-            <input id="marginal-tax-rate" type="text" placeholder="$300">
-        </div>
 
-	</fieldset>
-    
 </form>
 
-<button id="refresh">Run</button> 
+<button id="refresh">Refresh</button> 
 
 <div class="results-table">
 	<table class="tableizer-table">
@@ -169,8 +150,7 @@
 			<h1>Results</h1>
 		</thead>
 		<tbody>
-			<tr>
-				<td>&nbsp;</td>
+			<tr class="years">
 				<td class="table-heading">Year</td>
 				<td>1</td>
 				<td>2</td>
@@ -188,9 +168,8 @@
 				<td>14</td>
 			</tr>
 			<tr>
-				<td>&nbsp;</td>
 				<td class="table-heading">Property Value</td>
-				<td>$209,200</td>
+				<td class="r-property-value">$209,200</td>
 				<td>$218,823</td>
 				<td>$228,889</td>
 				<td>$239,418</td>
@@ -210,6 +189,23 @@
 	</table>
 			<h1>Annual Income & Costs</h1>
 		<table>	
+			<tr class="years">
+				<td class="table-heading">Year</td>
+				<td>1</td>
+				<td>2</td>
+				<td>3</td>
+				<td>4</td>
+				<td>5</td>
+				<td>6</td>
+				<td>7</td>
+				<td>8</td>
+				<td>9</td>
+				<td>10</td>
+				<td>11</td>
+				<td>12</td>
+				<td>13</td>
+				<td>14</td>
+			</tr>
 			<tr class="weekly-rent">
 				<td class="table-heading">Weekly Rent</td>
 				<td class="r-weekly-rent">$300</td>
@@ -373,7 +369,7 @@
 			<tr>
 
 				<td class="table-heading">Total Expenses</td>
-				<td>($11,525)</td>
+				<td class="r-total-expenses">($11,525)</td>
 				<td>($11,619)</td>
 				<td>($11,715)</td>
 				<td>($11,815)</td>
@@ -390,7 +386,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Gross Cashflow</td>
-				<td>$3,475</td>
+				<td class="r-gross-cashflow">$3,475</td>
 				<td>$3,831</td>
 				<td>$4,198</td>
 				<td>$4,576</td>
@@ -407,7 +403,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Chattels Depr</td>
-				<td>$0</td>
+				<td class="r-chattels-depr">$0</td>
 				<td>$0</td>
 				<td>$0</td>
 				<td>$0</td>
@@ -424,7 +420,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Taxable Income</td>
-				<td>$3,475</td>
+				<td class="r-taxable-income">$3,475</td>
 				<td>$3,831</td>
 				<td>$4,198</td>
 				<td>$4,576</td>
@@ -441,7 +437,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Tax/Rebate</td>
-				<td>($1,043)</td>
+				<td class="r-tax-rebate">($1,043)</td>
 				<td>($1,149)</td>
 				<td>($1,259)</td>
 				<td>($1,373)</td>
@@ -458,7 +454,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Net Cashflow</td>
-				<td>$2,433</td>
+				<td class="r-net-cashflow">$2,433</td>
 				<td>$2,682</td>
 				<td>$2,939</td>
 				<td>$3,203</td>
@@ -493,7 +489,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Equity</td>
-				<td>$89,200</td>
+				<td class="r-equity">$89,200</td>
 				<td>$98,823</td>
 				<td>$108,889</td>
 				<td>$119,418</td>
@@ -510,7 +506,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Equity %</td>
-				<td>42.64%</td>
+				<td class="r-equity-percent">42.64%</td>
 				<td>45.16%</td>
 				<td>47.57%</td>
 				<td>49.88%</td>
@@ -527,7 +523,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">ROI After Tax*</td>
-				<td>14.54%</td>
+				<td class="r-roi">14.54%</td>
 				<td>13.79%</td>
 				<td>13.16%</td>
 				<td>12.61%</td>
@@ -544,7 +540,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Return on capital**</td>
-				<td>16%</td>
+				<td class="r-return-capital">16%</td>
 				<td>33%</td>
 				<td>50%</td>
 				<td>69%</td>
@@ -584,7 +580,7 @@
 			<tr>
 				
 				<td class="table-heading">Annual Interest</td>
-				<td>($8,069)</td>
+				<td class="r-annual-interest">($8,069)</td>
 				<td>($7,936)</td>
 				<td>($7,794)</td>
 				<td>($7,642)</td>
@@ -601,7 +597,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Principal</td>
-				<td>($1,897)</td>
+				<td class="r-principal">($1,897)</td>
 				<td>($2,030)</td>
 				<td>($2,172)</td>
 				<td>($2,324)</td>
@@ -618,7 +614,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Loan Balance</td>
-				<td>$118,103</td>
+				<td class="r-loan-balance">$118,103</td>
 				<td>$116,073</td>
 				<td>$113,900</td>
 				<td>$111,576</td>
@@ -635,7 +631,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Total Expenses</td>
-				<td>($13,091)</td>
+				<td class="r-total-expenses">($13,091)</td>
 				<td>($13,185)</td>
 				<td>($13,281)</td>
 				<td>($13,381)</td>
@@ -652,7 +648,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Gross Cashflow</td>
-				<td>$1,909</td>
+				<td class="r-gross-cashflow">$1,909</td>
 				<td>$2,265</td>
 				<td>$2,632</td>
 				<td>$3,010</td>
@@ -669,7 +665,7 @@
 			</tr>
 			<tr>
 				<td class="table-heading">Chattels Depr</td>
-				<td>$0</td>
+				<td class="chattels-depr">$0</td>
 				<td>$0</td>
 				<td>$0</td>
 				<td>$0</td>

@@ -17,6 +17,11 @@ i{
 }
 tr, td{
 	border:1px grey solid;
+	padding: 10px;
+
+}
+td{
+	
 }
 tr:nth-child(even) 
 	{
@@ -24,14 +29,28 @@ tr:nth-child(even)
 	}
 
 
+.results-table td{
+	padding: 1em;
+}
+.years{
+	background-color: tomato;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+}
 #refresh{
 	background-color: lightgreen;
 	/*color: white;*/
 	padding: 1em;
 	margin: auto;
 	margin-top: 2em;
+	width: 40%;
 	display: flex;
 	justify-content: center;
+	transition: all ease 0.3s;
+}
+#refresh:hover{
+	background-color: white;
 }
  
 .wrap{
@@ -57,6 +76,7 @@ tr:nth-child(even)
 	border:1px black solid !important;
 	margin: 1em !important;
 	flex: 1 0 40%;
+	text-align: center;
 }
 
 
