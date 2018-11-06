@@ -47,10 +47,10 @@ tr:nth-child(even)
 	width: 40%;
 	display: flex;
 	justify-content: center;
-	transition: all ease 0.3s;
+	/*transition: all ease 0.3s;*/
 }
 #refresh:hover{
-	background-color: white;
+	background: white;
 }
  
 .wrap{

@@ -54,10 +54,13 @@ $('#refresh').on('click',function(){
 
 
 	//Calculate property managemnet
-	annualRentVal = $('.r-annual-rent').html();
+	annualRentVal = $('.r-annual-rent').html().substring(1);
 
 	var propertyMangt = $ ('#property-management').val();
-	var propertyMangtResult = $('.r-property-mangt').html('$'+(annualRentVal*propertyMangt)/100);
+
+	// var testSum = (parseFloat(annualRentVal)*parseFloat(propertyMangt));🤔
+	var propertyMangtResult = $('.r-property-mangt').html('$'+((parseFloat(annualRentVal)*parseFloat(propertyMangt))/100));
+
 
 
 
@@ -82,17 +85,17 @@ $('#refresh').on('click',function(){
 	//Calcualte water and rates
 	var water = $('#water').val().replace(/,/g, '');
 	var rates = $('#rates').val().replace(/,/g, '');
-	$('.r-rates-water').html('$'+(+water + +rates));
+	var ratesWaterValue= $('.r-rates-water').html('$'+(+water + +rates));
 
 		//Calculate Increase
 		var ratesWaterCell = $('.r-rates-water');
-		var ratesWaterValue = parseFloat(water + rates);
-		var costIncreases = $('#cost-increase').val()/100;
+		var ratesWaterValue = parseFloat(+water + +rates);
+		var costIncreases = $('#cost-increases').val()/100;
 
 		while(ratesWaterCell.next().length>0){
 			ratesWaterValue += ratesWaterValue*costIncreases;
 			ratesWaterCell = ratesWaterCell.next();
-			ratesWaterCell.text('$'+ratesWaterValue);
+			ratesWaterCell.text('$'+ratesWaterValue.toFixed(0));
 		}
 
 
@@ -102,17 +105,27 @@ $('#refresh').on('click',function(){
 	$('.r-body-corp').text('$'+bodyCorpVal);
 
 	//Insurance Calc
-	var insuranceVal =$('#insurance').val();
+	var insuranceVal =$('#insurance').val().replace(/,/g, '');
 	$('.r-insurance').text('$'+insuranceVal);
+
+	var insuranceVal = parseFloat(insuranceVal);
+	var insuranceCell = $('.r-insurance');
+		//Calculate Increase
+		while(insuranceCell.next().length>0){
+			insuranceVal += insuranceVal*costIncreases;
+			insuranceCell = insuranceCell.next();
+			insuranceCell.text('$'+insuranceVal.toFixed(0));
+		}
 
 
 	//Maintenance
-	var maintenanceValUnder10 =$('#maintenance-underten').val();
+	var maintenanceValUnder10 = $('#maintenance-underten').val();
 	var maintenanceResult = $('.r-maintenance').text('$'+annualRentVal*(maintenanceValUnder10/100));
 
+	console.log(maintenanceResult.val().replace(/,/g, ''))
 
 	// Annual Costs
-	// var annualCost = (maintenanceResult+insuranceVal+bodyCorpVal+ratesWaterResult+propertyMangtResult);
+	// var annualCost = (maintenanceResult.val()+insuranceVal+bodyCorpVal+ratesWaterValue+propertyMangtResult.val());
 	// var annualCostResult = $('.r-annual-costs').text(annualCost);
 
 
