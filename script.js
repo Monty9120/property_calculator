@@ -16,7 +16,7 @@ $('#refresh').on('click',function(){
 
 	//Calculate Rental Income
 	var rentalIncome = $('#rental-income').val().replace(/,/g, '');
-	$('.r-weekly-rent').html(rentalIncome)
+	$('.r-weekly-rent').html('$'+rentalIncome)
 
 
 
@@ -25,7 +25,7 @@ $('#refresh').on('click',function(){
 	var purchasePrice = $('#purchase-price').val().replace(/,/g, '');
 	var annualVaccancy = $('#annual-vaccancy').val()
 	var rentalIncome = $('#rental-income').val().replace(/,/g, '');
-	$('.r-annual-rent').html(rentalIncome*(52-annualVaccancy));
+	$('.r-annual-rent').html('$'+rentalIncome*(52-annualVaccancy));
 	// $('.loan-amount').html(purchasePrice-deposit)
 
 	//Calculate property managemnet
