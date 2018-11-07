@@ -12,6 +12,8 @@ $(function(){
 
 });
 
+
+
 $('#refresh').on('click',function(){
 
 
@@ -56,12 +58,13 @@ $('#refresh').on('click',function(){
 	//Calculate property managemnet
 	annualRentVal = $('.r-annual-rent').html().substring(1);
 
-	var propertyMangt = $ ('#property-management').val();
+	var propertyMngtVal = $ ('#property-management').val();
 
-	// var testSum = (parseFloat(annualRentVal)*parseFloat(propertyMangt));🤔
-	var propertyMangtResult = $('.r-property-mangt').html('$'+((parseFloat(annualRentVal)*parseFloat(propertyMangt))/100));
+	// var testSum = (parseFloat(annualRentVal)*parseFloat(propertyMangt));
+	 $('.r-property-mangt').html('$'+(annualRentVal*propertyMngtVal)/100);
 
-
+	 
+	 var propertyMangtResult = (annualRentVal*propertyMngtVal)/100
 
 
 
@@ -74,10 +77,45 @@ $('#refresh').on('click',function(){
 		var weeklyRent = parseFloat($('#rental-income').val().replace(/,/g, ''));
 		var rentalIncrease = $('#rental-increase').val()/100;
 
+		//Annual Rent
+		var annualRentCell = $('.r-annual-rent').next();
+		var annualRent = 0;
+
+		//Property Management
+		var propertyMngtCell = $('.r-property-mangt').next();
+		// var propertyMngt = 0;
+
 		while(weeklyRentCell.next().length>0){
 			weeklyRent += weeklyRent*rentalIncrease;
 			weeklyRentCell = weeklyRentCell.next();
 			weeklyRentCell.text('$'+weeklyRent.toFixed(0));
+
+			//Annual rent loop
+			annualRent = weeklyRent*(52 - annualVaccancy);
+			annualRentCell.text('$'+annualRent.toFixed(0));
+			annualRentCell = annualRentCell.next();
+
+			//Property mngt loop
+			propertyMangtResult = (annualRent*propertyMngtVal)/100
+			propertyMngtCell.text('$'+propertyMangtResult.toFixed(0));
+			propertyMngtCell = propertyMngtCell.next();
+
+
+
+			//Maintenance CHANGE TO NUMVBERS NOT STRING
+			var maintenanceValUnder10 = parseFloat($('#maintenance-underten').val().replace(/,/g, ''));
+			var maintenanceResult = $('.r-maintenance').text('$'+annualRentVal*(maintenanceValUnder10/100));
+			var maintenanceCell = $('.r-maintenance');
+
+			// console.log(annualRentVal*(maintenanceValUnder10/100))
+
+			while(maintenanceCell.next().length>0){
+				annualRent += annualRent*maintenanceValUnder10;
+				maintenanceCell = maintenanceCell.next();
+				maintenanceCell.text('$'+annualRent.toFixed(0));
+			}
+
+
 		}
 
 	
@@ -101,8 +139,21 @@ $('#refresh').on('click',function(){
 
 
 	//Body coroperate
-	var bodyCorpVal =$('#body-corporate').val();
-	$('.r-body-corp').text('$'+bodyCorpVal);
+	// var bodyCorpVal = parseFloat($('#body-corporate').val());
+	var bodyCorp =parseFloat($('#body-corporate').val().replace(/,/g, ''));
+	$('.r-body-corp').text('$'+bodyCorp);
+
+		//Increase
+		var bodyCorpCell = $('.r-body-corp');
+		
+		console.log(bodyCorp);
+			
+
+		while(bodyCorpCell.next().length>0){
+				bodyCorp += bodyCorp*costIncreases;
+				bodyCorpCell = bodyCorpCell.next();
+				bodyCorpCell.text('$'+bodyCorp.toFixed(0));
+		}
 
 	//Insurance Calc
 	var insuranceVal =$('#insurance').val().replace(/,/g, '');
@@ -118,11 +169,7 @@ $('#refresh').on('click',function(){
 		}
 
 
-	//Maintenance
-	var maintenanceValUnder10 = $('#maintenance-underten').val();
-	var maintenanceResult = $('.r-maintenance').text('$'+annualRentVal*(maintenanceValUnder10/100));
-
-	console.log(maintenanceResult.val().replace(/,/g, ''))
+	
 
 	// Annual Costs
 	// var annualCost = (maintenanceResult.val()+insuranceVal+bodyCorpVal+ratesWaterValue+propertyMangtResult.val());
