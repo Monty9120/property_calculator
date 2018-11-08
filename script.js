@@ -104,15 +104,20 @@ $('#refresh').on('click',function(){
 
 			//Maintenance CHANGE TO NUMVBERS NOT STRING
 			var maintenanceValUnder10 = parseFloat($('#maintenance-underten').val().replace(/,/g, ''));
+
 			var maintenanceResult = $('.r-maintenance').text('$'+annualRentVal*(maintenanceValUnder10/100));
+			var maintenanceResultVal = annualRentVal*(maintenanceValUnder10/100);
 			var maintenanceCell = $('.r-maintenance');
+
+			console.log(maintenanceResultVal);
+
 
 			// console.log(annualRentVal*(maintenanceValUnder10/100))
 
 			while(maintenanceCell.next().length>0){
-				annualRent += annualRent*maintenanceValUnder10;
+				maintenanceResultVal += parseFloat(annualRent*maintenanceValUnder10);
 				maintenanceCell = maintenanceCell.next();
-				maintenanceCell.text('$'+annualRent.toFixed(0));
+				maintenanceCell.text('$'+maintenanceResultVal);
 			}
 
 
@@ -172,8 +177,15 @@ $('#refresh').on('click',function(){
 	
 
 	// Annual Costs
-	// var annualCost = (maintenanceResult.val()+insuranceVal+bodyCorpVal+ratesWaterValue+propertyMangtResult.val());
-	// var annualCostResult = $('.r-annual-costs').text(annualCost);
+	var maintenanceVal = annualRentVal*(maintenanceValUnder10/100)
+	var annualCost = parseFloat((+maintenanceVal + +insuranceVal + +bodyCorp + +ratesWaterValue + +propertyMangtResult.toFixed(0))).toFixed(0);
+	// console.log('Annual Cost: ' +annualCost)
+	// console.log('Insurance Value: ' + insuranceVal)
+	// console.log('Property Mangt: ' + propertyMangtResult.toFixed(0))
+	// console.log('Body Corp: '+bodyCorp)
+	// console.log('Rates: '+ ratesWaterValue)
+	// console.log('Maintenance: '+maintenanceVal)
+	var annualCostResult = $('.r-annual-costs').text(annualCost);
 
 
 	//Annual interest
@@ -184,10 +196,14 @@ $('#refresh').on('click',function(){
 	// console.log(loanAmount.html());
 
 	var annualInterestResult  = $('.r-annual-interest').html('$'+(loanAmount.html()*(annualInterestVal/100))*-1);
-
+	var annualInterest = (loanAmount.html()*(annualInterestVal/100)*-1)
 
 	//Total expenses
-	// var totalExpenses = (annualInterestResult.html()-annualCostResult.html())
+	var totalExpenses = (annualCost - annualInterest)*-1;
+	console.log(totalExpenses)
+
+	//Gross Cashflow
+	$('.r-gross-cashflow').html(+totalExpenses + +annualRentVal);
 
 });
 

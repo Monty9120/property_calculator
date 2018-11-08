@@ -1,5 +1,12 @@
+body{
+	/*overflow-x: hidden;*/
+}
 fieldset{
-
+}
+.table{
+	overflow-x:scroll !important;
+	max-width: 500px !important;
+	border: 1px red solid;
 }
 .center{
 	text-align:center;
@@ -29,6 +36,9 @@ tr:nth-child(even)
 		background-color: #f2f2f2;
 	}
 
+.results-table{
+
+}
 
 .results-table td{
 	padding: 1em;
