@@ -109,20 +109,26 @@ $('#refresh').on('click',function(){
 
 
 			var maintenanceValUnder10 = parseFloat($('#maintenance-underten').val().replace(/,/g, ''));
+			// var maintenanceResultVal = annualRentVal*(maintenanceValUnder10/100);
+			// $('.r-maintenance').html(maintenanceResultVal);
+			
 
-			var maintenanceResult = $('.r-maintenance').text('$'+annualRentVal*(maintenanceValUnder10/100));
-			var maintenanceResultVal = annualRentVal*(maintenanceValUnder10/100);
-			var maintenanceCell = $('.r-maintenance');
 
-			console.log(maintenanceResultVal);
 
 
 			// console.log(annualRentVal*(maintenanceValUnder10/100))
 
-			while(maintenanceCell.next().length>0){
-				maintenanceResultVal += parseFloat(annualRent*maintenanceValUnder10);
+			var cellAnualRent = $('.r-annual-rent');
+			var maintenanceCell = $('.r-maintenance');
+
+			while(maintenanceCell.length>0){
+				var annualRentCellValue = cellAnualRent.html().substring(1);
+				var maintenanceResultVal = parseFloat(+annualRentCellValue * (+maintenanceValUnder10/100)).toFixed(0);
+
+				
+				maintenanceCell.text('$'+ +maintenanceResultVal);
 				maintenanceCell = maintenanceCell.next();
-				maintenanceCell.text('$'+maintenanceResultVal);
+				cellAnualRent = cellAnualRent.next();
 			}
 
 
@@ -183,8 +189,8 @@ $('#refresh').on('click',function(){
 
 	// Annual Costs
 	var maintenanceCellVal = annualRentVal*(maintenanceValUnder10/100)
-	var insuranceCellVal =$('#insurance').val().replace(/,/g, '');
-	var ratesCellVal =$('.r-rates-water').html().substring(1);
+	var insuranceCellVal = $('#insurance').val().replace(/,/g, '');
+	var ratesCellVal = $('.r-rates-water').html().substring(1);
 	var propertyMangCellVal = $('.r-property-mangt').html().substring(1);
 	var bodyCorpCell = $('.r-body-corp').html().substring(1);
 	var annualCost = parseFloat((+maintenanceCellVal + +insuranceCellVal + +bodyCorpCell + +ratesCellVal + +propertyMangCellVal));
@@ -196,6 +202,43 @@ $('#refresh').on('click',function(){
 	// console.log('Maintenance: '+maintenanceCellVal)
 	var annualCostResult = $('.r-annual-costs').text(annualCost);
 
+	
+	//Annual Cost Loop 	-	-	-	-	-	-	-	-	-	-	-	-	
+	annualCostResult.next()
+
+	var cellInsurance = $('.r-insurance');
+	var cellRates = $('.r-rates-water');
+	var cellBodyCorp = $('.r-body-corp');
+	var cellPropMan = $('.r-property-mangt');
+	var cellMaintenance = $('.r-maintenance');
+
+	var cellAnnualCost= $('.r-annual-costs')
+
+	while(cellAnnualCost.length > 0){
+		//Define cells
+		var insuranceCellVal = +cellInsurance.html().substring(1);
+		var ratesCellVal = +cellRates.html().substring(1);
+		var bodyCorpCellVal = +cellBodyCorp.html().substring(1);
+		var cellPropManVal = +cellPropMan.html().substring(1);
+		var cellMaintenanceVal = +cellMaintenance.html().substring(1);
+
+		//Get total
+		var total = insuranceCellVal + ratesCellVal +bodyCorpCellVal + cellPropManVal + cellMaintenanceVal;
+		cellAnnualCost.html('$'+total);
+
+		//Get values
+		cellInsurance = cellInsurance.next();
+		cellRates = cellRates.next();
+		cellBodyCorp = cellBodyCorp.next();
+		cellPropMan = cellPropMan.next();
+		cellMaintenance = cellMaintenance.next();
+
+		cellAnnualCost = cellAnnualCost.next();
+
+
+
+	}
+	// -	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
 
 	//Annual interest
 	var purchasePrice = $('#purchase-price').val().replace(/,/g, '');
@@ -214,6 +257,20 @@ $('#refresh').on('click',function(){
 	//Total expenses
 	var totalExpenses = (annualCost - annualInterestValue)*-1;
 	$('.r-total-expenses').html(totalExpenses)
+
+	
+	//Total expenses loop
+	var cellTotalExpenses = $('.r-total-expenses')
+
+		while(cellTotalExpenses.next().length>0);
+		totalExpenses = (annualCost - annualInterestValue)*-1;
+		cellTotalExpenses.html('$'+totalExpenses);
+		cellTotalExpenses = cellTotalExpenses.next();
+
+	//Property mngt loop
+			// propertyMangtResult = ((annualRent.toFixed(0)*propertyMngtVal)/100)
+			// propertyMngtCell.text('$'+propertyMangtResult.toFixed(0));
+			// propertyMngtCell = propertyMngtCell.next();
 
 
 	//Gross Cashflow
@@ -276,6 +333,12 @@ $('#refresh').on('click',function(){
 	// console.log((+equityValue - (+deposit + +capitalCosts)/(+deposit + +capitalCosts))
 
 	$('.r-return-capital').html(returnOnCapital + '%');
+
+
+
+
+
+
 
 
 
