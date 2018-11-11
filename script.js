@@ -20,20 +20,20 @@ if($('tr:contains("5")')){
 
 
 $('#refresh').on('click',function(){
-
-
 	//Caclulate Property Value
 
 	var propertyValueCell = $('.r-property-value');
 	var capitalGrowth = $('#capital-growth').val()/100;
 	var propertyValueInput = $('#property-value').val().replace(/,/g, '');
+	var propertyValueValue = parseFloat(propertyValueInput);
+
+		$('.r-property-value').html('$'+(propertyValueValue+=propertyValueValue*capitalGrowth))
 	
-		$('.r-property-value').html('$'+propertyValueInput)
 
 		//Calculate Increase
-		var propertyValueValue = parseFloat(propertyValueInput);
+		
 
-		while(propertyValueCell.next().length>0){
+		while(propertyValueCell.length>0){
 			propertyValueValue += propertyValueValue*capitalGrowth;
 			propertyValueCell = propertyValueCell.next();
 			propertyValueCell.text('$'+propertyValueValue.toFixed(0));
@@ -240,10 +240,35 @@ $('#refresh').on('click',function(){
 	$('.r-tax-rebate').html(((taxableIncomeVal*marginalTaxRate)*-1).toFixed(0));
 	var taxRebateVal = ((taxableIncomeVal*marginalTaxRate)*-1).toFixed(0)
 
-	console.log('cashflow val: '+grossCashflowVal)
-	console.log('taxrebate val: '+taxRebateVal)
+	// console.log('cashflow val: '+grossCashflowVal)
+	// console.log('taxrebate val: '+taxRebateVal)
+
 	//Net Cashflow
-	$('.r-net-cashflow').html(+grossCashflowVal + +taxRebateVal);
+	var netCashflow = $('.r-net-cashflow').html(+grossCashflowVal + +taxRebateVal);
+
+	var netCashflowVal = (+grossCashflowVal + +taxRebateVal)
+
+
+	//Equity
+	var loanAmountValue = (purchasePrice-deposit)
+	var proeprtyValueInput = $('.r-property-value').html().substring(1);
+
+	var equityValue = (proeprtyValueInput - loanAmountValue).toFixed(0);
+	$('.r-equity').html(equityValue)
+
+	//Equity %
+	var equityPercentage = ((+equityValue/ +proeprtyValueInput)*100).toFixed(2)
+	$('.r-equity-percent').html(equityPercentage +'%')
+
+	//ROI after tax
+
+	var propertyValueValue = parseFloat(propertyValueInput);
+
+	// net cashflow +equity/(deposit+capitalcost)
+
+	var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+	$('.r-roi').html((+netCashflowVal + +equityValue)/(+deposit + +capitalCosts) -1 + '%') ;
+
 
 });
 
