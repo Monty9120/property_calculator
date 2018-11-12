@@ -308,6 +308,7 @@ $('#refresh').on('click',function(){
 var cellTaxRebate = $('.r-tax-rebate')
 var cellTaxableIncome = $('.r-taxable-income');
 
+
 	while (cellTaxRebate.length>0) {
 		var taxableIncomeCellValue = cellTaxableIncome.html().substring(1);
 
@@ -323,14 +324,91 @@ var cellTaxableIncome = $('.r-taxable-income');
 
 	}
 
+//Net CASHFLow
 
+var cellTaxRebate = $('.r-tax-rebate')
+var cellGrossCashflow = $('.r-gross-cashflow');
+var cellNetCashflow = $('.r-net-cashflow');
+
+	while (cellTaxRebate.length>0) {
+		//Get values of related cells
+		var grossCashflowCellValue = cellGrossCashflow.html().substring(1);
+		var taxRebateCellValue = cellTaxRebate.html().substring(1);
+
+
+		
+		cellNetCashflow.html('$'+((+grossCashflowCellValue + +taxRebateCellValue)).toFixed(0))
+
+		cellGrossCashflow = cellGrossCashflow.next();
+		cellTaxRebate = cellTaxRebate.next();
+		cellNetCashflow = cellNetCashflow.next();
+
+
+	}
+
+
+//Equity
+var cellEquity = $('.r-equity');
+var cellPropertyValue = $('.r-property-value');
+
+
+	while(cellEquity.length>0){
+
+		//Get values of related cells
+		var propertyValueCellValue = cellPropertyValue.html().substring(1);
+		var loanAmountValue = (purchasePrice-deposit);
+		
+
+		cellEquity.html('$'+ +(propertyValueCellValue-loanAmountValue).toFixed(0));
+
+
+		cellEquity = cellEquity.next();
+		cellPropertyValue = cellPropertyValue.next();
+
+
+	}
+	
+// Equity Percentage
 
 	
+var cellEquity = $('.r-equity');
+var cellPropertyValue = $('.r-property-value');
+var cellEquityPercent = $('.r-equity-percent');
+var cellRoi = $('.r-roi');
+var cellNetCashflow = $('.r-net-cashflow');
+
+
+	while(cellEquity.length>0){
+
+		//Get values of related cells
+		var equityCellValue = cellEquity.html().substring(1);
+		var propertyValueCellValue = cellPropertyValue.html().substring(1);
+		var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+		var netCashflowValue = cellNetCashflow.html().substring(1)
+
+		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2));
+		cellRoi.html(((+netCashflowValue + +equityCellValue)/(+deposit + +capitalCosts)-1)*100);
+
+
+
+
+		cellEquity = cellEquity.next();
+		cellPropertyValue = cellPropertyValue.next();
+		cellEquityPercent = cellEquityPercent.next();
+		cellRoi = cellRoi.next();
+		cellNetCashflow = cellNetCashflow.next();
+
+
+	}
 	
 
 
 
-
+	//ROI after tax
+	// var propertyValueValue = parseFloat(propertyValueInput);
+	// var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+	// var roiAfterTax = (((+netCashflowVal + +equityValue)/(+deposit + +capitalCosts) -1) * 100).toFixed(2)
+	// $('.r-roi').html(roiAfterTax + '%') ;
 
 
 	
@@ -360,11 +438,7 @@ var cellTaxableIncome = $('.r-taxable-income');
 	// var equityPercentage = ((+equityValue/ +proeprtyValueInput)*100).toFixed(2)
 	// $('.r-equity-percent').html(equityPercentage +'%')
 
-	//ROI after tax
-	// var propertyValueValue = parseFloat(propertyValueInput);
-	// var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
-	// var roiAfterTax = (((+netCashflowVal + +equityValue)/(+deposit + +capitalCosts) -1) * 100).toFixed(2)
-	// $('.r-roi').html(roiAfterTax + '%') ;
+
 
 
 	//Return on Capital
