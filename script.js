@@ -12,7 +12,9 @@ $(function(){
 
 });
 
-
+// $( window ).scroll(function(){
+// 	$('.table-heading').addClass('fixed')
+// })
 if($('tr:contains("5")')){
 	$(this).addClass('red');
 	console.log(this)
@@ -27,7 +29,7 @@ $('#refresh').on('click',function(){
 	var propertyValueInput = $('#property-value').val().replace(/,/g, '');
 	var propertyValueValue = parseFloat(propertyValueInput);
 
-		$('.r-property-value').html('$'+(propertyValueValue+=propertyValueValue*capitalGrowth))
+		$('.r-property-value').html(numeral((propertyValueValue+=propertyValueValue*capitalGrowth)).format('$ 0,0[.]00'))
 	
 
 		//Calculate Increase
@@ -36,7 +38,7 @@ $('#refresh').on('click',function(){
 		while(propertyValueCell.length>0){
 			propertyValueValue += propertyValueValue*capitalGrowth;
 			propertyValueCell = propertyValueCell.next();
-			propertyValueCell.text('$'+propertyValueValue.toFixed(0));
+			propertyValueCell.text(numeral(propertyValueValue).format('$ 0,0[.]00'));
 		}
 
 
@@ -368,10 +370,11 @@ var cellPropertyValue = $('.r-property-value');
 
 	}
 	
-// Equity Percentage
+// Equity Percentage and ROI
 
 	
 var cellEquity = $('.r-equity');
+var prevCellEquity = $('.r-equity').prev();
 var cellPropertyValue = $('.r-property-value');
 var cellEquityPercent = $('.r-equity-percent');
 var cellRoi = $('.r-roi');
@@ -384,10 +387,14 @@ var cellNetCashflow = $('.r-net-cashflow');
 		var equityCellValue = cellEquity.html().substring(1);
 		var propertyValueCellValue = cellPropertyValue.html().substring(1);
 		var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
-		var netCashflowValue = cellNetCashflow.html().substring(1)
+		var netCashflowValue = cellNetCashflow.html().substring(1);
+		var prevCellEquityValue = prevCellEquity.html().substring(1);
 
 		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2));
-		cellRoi.html(((+netCashflowValue + +equityCellValue)/(+deposit + +capitalCosts)-1)*100);
+		// cellRoi.html(((+netCashflowValue + +equityCellValue)/(+deposit + +capitalCosts)-1)*100);
+
+		cellRoi.html(((((+equityCellValue + +netCashflowValue) / +prevCellEquityValue)-1)*100).toFixed(2));
+
 
 
 
@@ -397,21 +404,38 @@ var cellNetCashflow = $('.r-net-cashflow');
 		cellEquityPercent = cellEquityPercent.next();
 		cellRoi = cellRoi.next();
 		cellNetCashflow = cellNetCashflow.next();
+		prevCellEquity = prevCellEquity.next();
 
 
 	}
 	
-
-
-
-	//ROI after tax
-	// var propertyValueValue = parseFloat(propertyValueInput);
-	// var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
-	// var roiAfterTax = (((+netCashflowVal + +equityValue)/(+deposit + +capitalCosts) -1) * 100).toFixed(2)
-	// $('.r-roi').html(roiAfterTax + '%') ;
-
+	//Return on Capital -	-	-	-	-	-
 
 	
+	var cellEquity = $('.r-equity');
+	var cellGrossCashflow = $('.r-gross-cashflow');
+	var cellReturnCapital = $('.r-return-capital');
+	//var deposit
+	while(cellReturnCapital.length>0){
+		var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+		var equityCellValue = cellEquity.html().substring(1);
+		var grossCashflowCellValue = cellGrossCashflow.html().substring(1);
+		var nextgrossCashFlow = cellGrossCashflow.next().html();
+
+		cellReturnCapital.html(+grossCashflowCellValue+ +nextgrossCashFlow);
+
+		cellEquity = cellEquity.next();
+		cellGrossCashflow = cellGrossCashflow.next();
+		cellReturnCapital = cellReturnCapital.next();
+	}
+
+
+	//Annual Interest 2?
+
+
+
+
+
 
 
 	//Cattelss Depr

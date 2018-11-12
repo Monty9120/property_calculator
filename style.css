@@ -10,6 +10,7 @@ fieldset{
 	overflow-x:scroll !important;
 	max-width: 500px !important;
 	border: 1px red solid;
+	position: relative;
 }
 .center{
 	text-align:center;
@@ -105,18 +106,23 @@ tr:nth-child(even)
 /*results*/
 .table-heading{
 	font-weight: bold;
-
 	background-color: royalblue;
 	color: white;
 	padding: 5px;
 }
 
 
-
+.fixed{
+	position: fixed;
+}
 @media only screen and (max-width: 600px) {
 	table{
 		width: 300px;
 		overflow: scroll;
 		/*color: red;*/
+	}
+	.results-table td.year{
+		
+		/*padding: 2em 7em;*/
 	}
 }
