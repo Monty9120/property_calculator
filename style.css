@@ -5,13 +5,18 @@ body{
 	/*overflow-x: hidden;*/
 }
 fieldset{
+	padding:1em;
 }
-.table{
-	overflow-x:scroll !important;
-	max-width: 500px !important;
-	border: 1px red solid;
-	position: relative;
+
+.capital-return-sum{
+	height: 1px;
+	opacity: 0;
 }
+.hide{
+	height: 1px;
+	display: none;
+}
+
 .center{
 	text-align:center;
 }
@@ -40,12 +45,20 @@ tr:nth-child(even)
 		background-color: #f2f2f2;
 	}
 
-.results-table{
+.table{
+	overflow-x: auto !important;
 
+
+}
+
+.results-table{
+	overflow: hidden;
+	width: 100%;
 }
 
 .results-table td{
 	padding: 1em;
+
 }
 .years{
 	background-color: tomato;
@@ -92,6 +105,7 @@ tr:nth-child(even)
 	margin: 1em !important;
 	flex: 1 0 40%;
 	/*text-align: center;*/
+	padding: 1em !important;
 	display: flex;
 	justify-content: center;
 }
@@ -109,6 +123,7 @@ tr:nth-child(even)
 	background-color: royalblue;
 	color: white;
 	padding: 5px;
+	max-width: 100px;
 }
 
 
