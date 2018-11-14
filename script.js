@@ -103,14 +103,20 @@ $('#refresh').on('click',function(){
 
 
 			var maintenanceValUnder10 = parseFloat($('#maintenance-underten').val().replace(/,/g, ''));
+			var maintenanceValOver10 = parseFloat($('#maintenance-overten').val().replace(/,/g, ''));
 
 			var cellAnualRent = $('.r-annual-rent');
 			var maintenanceCell = $('.r-maintenance');
 
 			while(maintenanceCell.length>0){
 				var annualRentCellValue = cellAnualRent.html();
-				var maintenanceResultVal = parseFloat(+annualRentCellValue * (+maintenanceValUnder10/100)).toFixed(0);
+				
+				if (maintenanceCell.length>10) {
+					var maintenanceResultVal = parseFloat(+annualRentCellValue * (+maintenanceValOver10/100)).toFixed(0);
+				}else{
+					var maintenanceResultVal = parseFloat(+annualRentCellValue * (+maintenanceValUnder10/100)).toFixed(0);
 
+				}
 				
 				maintenanceCell.text(+ +maintenanceResultVal);
 				maintenanceCell = maintenanceCell.next();
@@ -468,7 +474,10 @@ var cellNetCashflow = $('.r-net-cashflow');
 
 
 
-
+ var paymentsPerYear = 26;
+ var loanTerm = $('#loan-term').val()
+ var paymentsLoan = parseFloat(paymentsPerYear * +loanTerm);
+ console.log(paymentsLoan)
 
 
 });
