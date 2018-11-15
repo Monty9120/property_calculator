@@ -477,6 +477,11 @@ var cellNetCashflow = $('.r-net-cashflow');
  var paymentsPerYear = 26;
  var loanTerm = $('#loan-term').val()
  var paymentsLoan = parseFloat(paymentsPerYear * +loanTerm);
+ var ir = annualInterestVal;
+ var irFn = (((1+ +ir ^ (1/26))-1)/100) //7%
+ var beginningBal = loanValue;
+ var endBal = beginningBal - principal
+ console.log(irFn);
  console.log(paymentsLoan)
 
 
