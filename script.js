@@ -217,8 +217,9 @@ $('#refresh').on('click',function(){
 
 
 	//Gross Cashflow
-	$('.r-gross-cashflow').html(+totalExpenses + +annualRentVal);
 	var grossCashflowVal = (+totalExpenses + +annualRentVal)
+	$('.r-gross-cashflow').html(grossCashflowVal);
+	
 
 
 	//Cattelss Depr
@@ -261,13 +262,22 @@ $('#refresh').on('click',function(){
 	$('.r-equity-percent').html(equityPercentage +'%')
 
 	//ROI after tax
-
 	var propertyValueValue = parseFloat(propertyValueInput);
-
-	// net cashflow +equity/(deposit+capitalcost)
-
 	var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
-	$('.r-roi').html((+netCashflowVal + +equityValue)/(+deposit + +capitalCosts) -1 + '%') ;
+	var roiAfterTax = (((+netCashflowVal + +equityValue)/(+deposit + +capitalCosts) -1) * 100).toFixed(2)
+	$('.r-roi').html(roiAfterTax + '%') ;
+
+
+	//Return on Capital
+	//grosscashflow + (equity-(depost+capitalcosts))/(depost+capitalcosts))
+
+	var returnOnCapital = ((+grossCashflowVal + (+equityValue - (+deposit + +capitalCosts)))/(+deposit + +capitalCosts)*100).toFixed(0);
+	// console.log(grossCashflowVal);
+	// console.log((+equityValue - (+deposit + +capitalCosts)/(+deposit + +capitalCosts))
+
+	$('.r-return-capital').html(returnOnCapital + '%');
+
+
 
 
 });
