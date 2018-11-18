@@ -477,7 +477,38 @@ var cellNetCashflow = $('.r-net-cashflow');
  var paymentsPerYear = 26;
  var loanTerm = $('#loan-term').val()
  var paymentsLoan = parseFloat(paymentsPerYear * +loanTerm);
- console.log(paymentsLoan)
+
+ var interestRate = annualInterestVal/100;
+ console.log(interestRate)
+ var interestRateFn = ((Math.pow(1+interestRate,1/26)-1) *100).toFixed(2);
+
+console.log('Hi');
+console.log(interestRateFn)
+
+
+
+
+
+//PMT
+function pmt(rate, nper, pv, fv, type) {
+	if (!fv) fv = 0;
+	if (!type) type = 0;
+
+	if (rate == 0) return -(pv + fv)/nper;
+	
+	var pvif = Math.pow(1 + rate, nper);
+	var pmt = rate / (pvif - 1) * -(pv * pvif + fv);
+
+	if (type == 1) {
+		pmt /= (1 + rate);
+	};
+
+	return pmt;
+}
+
+console.log('rate:' + interestRateFn)
+console.log('loan: ' + loanAmountValue)
+console.log((pmt( +interestRate, +paymentsLoan , +loanAmountValue))/100);
 
 
 });
@@ -512,7 +543,9 @@ $('#marginal-tax-rate').val('30');
 
 
 
-	
 
 
 });
+
+
+
