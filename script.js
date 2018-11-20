@@ -477,6 +477,7 @@ var cellNetCashflow = $('.r-net-cashflow');
  var paymentsPerYear = 26;
  var loanTerm = $('#loan-term').val()
  var paymentsLoan = parseFloat(paymentsPerYear * +loanTerm);
+<<<<<<< HEAD
 
  var interestRate = annualInterestVal/100;
  console.log(interestRate)
@@ -509,6 +510,14 @@ function pmt(rate, nper, pv, fv, type) {
 console.log('rate:' + interestRateFn)
 console.log('loan: ' + loanAmountValue)
 console.log((pmt( +interestRate, +paymentsLoan , +loanAmountValue))/100);
+=======
+ var ir = annualInterestVal;
+ var irFn = (((1+ +ir ^ (1/26))-1)/100) //7%
+ var beginningBal = loanValue;
+ var endBal = beginningBal - principal
+ console.log(irFn);
+ console.log(paymentsLoan)
+>>>>>>> 686f1d4686eb6f60ad4147cd55881229ac5c7ba9
 
 
 });
