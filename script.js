@@ -477,7 +477,6 @@ var cellNetCashflow = $('.r-net-cashflow');
  var paymentsPerYear = 26;
  var loanTerm = $('#loan-term').val()
  var paymentsLoan = parseFloat(paymentsPerYear * +loanTerm);
-<<<<<<< HEAD
 
  var interestRate = annualInterestVal/100;
  console.log(interestRate)
@@ -507,17 +506,48 @@ function pmt(rate, nper, pv, fv, type) {
 	return pmt;
 }
 
+function PMT(ir, np, pv, fv, type) {
+    /*
+     * ir   - interest rate per month
+     * np   - number of periods (months)
+     * pv   - present value
+     * fv   - future value
+     * type - when the payments are due:
+     *        0: end of the period, e.g. end of month (default)
+     *        1: beginning of period
+     */
+    var pmt, pvif;
+
+    fv || (fv = 0);
+    type || (type = 0);
+
+    if (ir === 0)
+        return -(pv + fv)/np;
+
+    pvif = Math.pow(1 + ir, np);
+    pmt = - ir * pv * (pvif + fv) / (pvif - 1);
+
+    if (type === 1)
+        pmt /= (1 + ir);
+
+    return pmt;
+}
+
 console.log('rate:' + interestRateFn)
 console.log('loan: ' + loanAmountValue)
-console.log((pmt( +interestRate, +paymentsLoan , +loanAmountValue))/100);
-=======
+console.log('payments loan ' +paymentsLoan)
+console.log('pmt '+(PMT((Math.pow(1+interestRate,1/26)-1), +paymentsLoan , +loanAmountValue,0,0)));
+
  var ir = annualInterestVal;
+ console.log(ir)
  var irFn = (((1+ +ir ^ (1/26))-1)/100) //7%
  var beginningBal = loanValue;
- var endBal = beginningBal - principal
+ // var endBal = beginningBal - principal
  console.log(irFn);
- console.log(paymentsLoan)
->>>>>>> 686f1d4686eb6f60ad4147cd55881229ac5c7ba9
+
+
+var blah = (interestRateFn/Math.pow((1-(1 + interestRateFn)- +loanAmountValue)))
+console.log(blah)
 
 
 });
