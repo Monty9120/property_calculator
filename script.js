@@ -505,7 +505,7 @@ function pmt(rate, nper, pv, fv, type) {
 
 	return pmt;
 }
-
+var ExcelFormulas = {
 function PMT(ir, np, pv, fv, type) {
     /*
      * ir   - interest rate per month
@@ -531,19 +531,21 @@ function PMT(ir, np, pv, fv, type) {
         pmt /= (1 + ir);
 
     return pmt;
-}
+},
 
 //IPMT
 function IPMT (pv, pmt, rate, per) {
     var tmp = Math.pow(1 + rate, per);
     return 0 - (pv * tmp * rate + pmt * (tmp - 1));
-}
+},
 //PPMT
 function PPMT (rate, per, nper, pv, fv, type) {
     if (per < 1 || (per >= nper + 1)) return null;
     var pmt = this.PMT(rate, nper, pv, fv, type);
     var ipmt = this.IPMT(pv, pmt, rate, per - 1);
     return pmt - ipmt;
+},
+
 }
 
 console.log('rate:' + interestRateFn)
