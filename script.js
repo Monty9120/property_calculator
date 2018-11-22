@@ -489,22 +489,15 @@ console.log(interestRateFn)
 
 
 
+
+
+
+
+
+
+
+// PRINCIPAL SCENARIO -	-	-	-	-	-	-	-	-	-	-	-	-	-	-	-
 //PMT
-function pmt(rate, nper, pv, fv, type) {
-	if (!fv) fv = 0;
-	if (!type) type = 0;
-
-	if (rate == 0) return -(pv + fv)/nper;
-	
-	var pvif = Math.pow(1 + rate, nper);
-	var pmt = rate / (pvif - 1) * -(pv * pvif + fv);
-
-	if (type == 1) {
-		pmt /= (1 + rate);
-	};
-
-	return pmt;
-}
 function PMT(ir, np, pv, fv, type) {
     /*
      * ir   - interest rate per month
@@ -550,35 +543,193 @@ function PPMT (rate, per, nper, pv, fv, type) {
 console.log('rate:' + interestRateFn)
 console.log('loan: ' + loanAmountValue)
 console.log('payments loan ' +paymentsLoan)
+
 var pmt = (PMT((Math.pow(1+interestRate,1/26)-1), +paymentsLoan , +loanAmountValue,0,0)).toFixed(2);
 console.log('pmt: ' + pmt)
 var ipmt = (IPMT(+loanAmountValue, pmt, (Math.pow(1+interestRate,1/26)-1), 1)).toFixed(2);
 console.log('ipmt: ' + ipmt)
-
-
-var ppmt = (PPMT((Math.pow(1+interestRate,1/26)-1),1,+paymentsLoan,+loanAmountValue,0,0)).toFixed(2)
+var ppmt = (PPMT((Math.pow(1+interestRate,1/26)-1),1,+paymentsLoan,+loanAmountValue,0,0))
 console.log('ppmt: ' + ppmt);
 
-var number = 0;
+// $('.r-int').html(ppmt);
+var fortnight = 0;
+var fortnight2 = 1;
 var cellInt = $('.r-int');
-var cellIntVal = $('.r-int').html();
+var cellPrincipal = $('.r-raw-principal')
+cellPrincipal.html('1');
 
-
+var annualInterest2Sum = 0;
+var principal2Sum = 0;
 while(cellInt.length>0){
-	var ipmt = (IPMT(+loanAmountValue, pmt, (Math.pow(1+interestRate,1/26)-1), number)).toFixed(2);
+	var ipmt = (IPMT(+loanAmountValue, pmt, (Math.pow(1+interestRate,1/26)-1), fortnight)).toFixed(2);
+	var ppmt = (PPMT((Math.pow(1+interestRate,1/26)-1),fortnight2,+paymentsLoan,+loanAmountValue,0,0))
 	
 	cellInt.html(ipmt);
+	cellPrincipal.html(ppmt);
 
-	number = number + 1;
+	fortnight = fortnight + 1;
+	fortnight2 = fortnight2 +1;
 	
+	annualInterest2Sum += +ipmt;
+	principal2Sum += +ppmt;
 
 	cellInt = cellInt.next();
+	cellPrincipal = cellPrincipal.next();
 
-	cellSum = parseFloat(cellInt.val());
-	console.log(cellSum)
+	
+}
+console.log(annualInterest2Sum.toFixed(2))
+console.log(principal2Sum.toFixed(2))
+
+
+$('.r-annual-interest2').html(annualInterest2Sum.toFixed(0));
+$('.r-principal').html(principal2Sum.toFixed(0));
+
+
+var pLoanBalance = (loanAmountValue + principal2Sum).toFixed(0);
+$('.r-loan-balance').html(pLoanBalance)
+
+
+var loanCell = $('.r-loan-balance').next();
+var prevLoanCell = loanCell.prev();
+var principalCell = $('.r-principal');
+while (principalCell.length>0) {
+
+	var loanPrevValue = prevLoanCell.html();
+	var principalValue = principalCell.html();
+
+	loanCell.html(loanPrevValue+ principalValue)
+	console.log(loanPrevValue)
+
+
+
+	loanCell = loanCell.next();
+	principalCell = principalCell.next();
+	prevLoanCell = prevLoanCell.next();
+
 }
 
+//P Total Expenses 
+var principalValue = principalCell.html();
+var pTotalExpenses = (+principal2Sum + +annualInterest2Sum - +annualCost).toFixed(0)
+$('.r-total-expenses2').html(pTotalExpenses);
 
+//P Gross Cashflow
+var pGrossCashflow = (+pTotalExpenses + +annualRentVal)
+$('.r-gross-cashflow2').html(pGrossCashflow);
+
+
+//P Taxable Income
+var pTaxableIncome = (+annualRentVal + +annualInterest2Sum + 0 - +annualCost);
+$('.r-taxable-income2').html(pTaxableIncome);
+
+//P TaxRebate
+var pTaxRebate = ((pTaxableIncome * marginalTaxRate) *-1).toFixed(0);
+$('.r-tax-rebate2').html(pTaxRebate);
+
+
+//Net Cashflow
+var pNetCashflow = (+pGrossCashflow + +pTaxRebate);
+$('.r-net-cashflow2').html(pNetCashflow);
+
+//Equity
+var cellPropertyValue = $('.r-property-value');
+var pEquity = (+cellPropertyValue.html() - +pLoanBalance);
+console.log('p equity: ' +pEquity);
+$('.r-equity2').html(pEquity);
+//Equity %
+var pEquityPercent = (+pEquity / +cellPropertyValue.html())
+console.log('p equity%: ' +pEquityPercent);
+
+//P Roi after tax
+
+
+
+
+
+
+//Equity
+var cellEquity = $('.r-equity2');
+var cellPropertyValue = $('.r-property-value');
+var cellLoanBalance = $('.r-loan-balance');
+
+	while(cellEquity.length>0){
+
+		//Get values of related cells
+		var propertyValueCellValue = cellPropertyValue.html();
+		var pLoanBalance = cellLoanBalance.html();
+
+		cellEquity.html(+ +(+propertyValueCellValue - +pLoanBalance).toFixed(0));
+
+
+		cellEquity = cellEquity.next();
+		cellPropertyValue = cellPropertyValue.next();
+		cellLoanBalance = cellLoanBalance.next();
+
+
+	}
+	
+// Equity Percentage and ROI
+
+	
+var cellEquity = $('.r-equity2');
+var prevCellEquity = $('.r-equity2').prev();
+var cellPropertyValue = $('.r-property-value');
+var cellEquityPercent = $('.r-equity-percent2');
+var cellRoi = $('.r-roi-2');
+var cellNetCashflow = $('.r-net-cashflow2');
+
+
+	while(cellEquity.length>0){
+
+		//Get values of related cells
+		var equityCellValue = cellEquity.html();
+		var propertyValueCellValue = cellPropertyValue.html();
+		var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+		var netCashflowValue = cellNetCashflow.html();
+		var prevCellEquityValue = prevCellEquity.html();
+
+		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2)+'HI');
+
+
+		cellRoi.html(((((+equityCellValue + +netCashflowValue) / +prevCellEquityValue)-1)*100).toFixed(2)+'hi');
+
+
+
+
+
+		cellEquity = cellEquity.next();
+		cellPropertyValue = cellPropertyValue.next();
+		cellEquityPercent = cellEquityPercent.next();
+		cellRoi = cellRoi.next();
+		cellNetCashflow = cellNetCashflow.next();
+		prevCellEquity = prevCellEquity.next();
+
+
+	}
+
+
+//Get Cells
+// var cellEquity = $('.r-equity');
+// var cellPropertyValue = $('.r-property-value');
+
+
+// 	while(cellEquity.length>0){
+
+// 		//Get values of related cells
+// 		var propertyValueCellValue = cellPropertyValue.html();
+// 		var loanAmountValue = (purchasePrice-deposit);
+
+		//Add value into cell
+// 		cellEquity.html(+ +(propertyValueCellValue-loanAmountValue).toFixed(0));
+
+		//Go to next cells
+// 		cellEquity = cellEquity.next();
+// 		cellPropertyValue = cellPropertyValue.next();
+
+
+// 	}
+	
 
 });
 
