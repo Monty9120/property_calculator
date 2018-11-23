@@ -533,21 +533,29 @@ function PMT(ir, np, pv, fv, type) {
     return pmt;
 }
 
+//IPMT
+function IPMT (pv, pmt, rate, per) {
+    var tmp = Math.pow(1 + rate, per);
+    return 0 - (pv * tmp * rate + pmt * (tmp - 1));
+}
+//PPMT
+function PPMT (rate, per, nper, pv, fv, type) {
+    if (per < 1 || (per >= nper + 1)) return null;
+    var pmt = this.PMT(rate, nper, pv, fv, type);
+    var ipmt = this.IPMT(pv, pmt, rate, per - 1);
+    return pmt - ipmt;
+}
+
 console.log('rate:' + interestRateFn)
 console.log('loan: ' + loanAmountValue)
 console.log('payments loan ' +paymentsLoan)
-console.log('pmt '+(PMT((Math.pow(1+interestRate,1/26)-1), +paymentsLoan , +loanAmountValue,0,0)));
+var pmt = ((PMT((Math.pow(1+interestRate,1/26)-1), +paymentsLoan , +loanAmountValue,0,0)).toFixed(2));
+console.log('pmt: ' + pmt)
+var ipmt = (IPMT(+loanAmountValue, pmt, (Math.pow(1+interestRate,1/26)-1), 0)).toFixed(2);
+console.log('ipmt: ' + ipmt)
 
- var ir = annualInterestVal;
- console.log(ir)
- var irFn = (((1+ +ir ^ (1/26))-1)/100) //7%
- var beginningBal = loanValue;
- // var endBal = beginningBal - principal
- console.log(irFn);
+console.log('ppmt: ' + (PPMT((Math.pow(1+interestRate,1/26)-1),1,+paymentsLoan,+loanAmountValue,0,0)))
 
-
-var blah = (interestRateFn/Math.pow((1-(1 + interestRateFn)- +loanAmountValue)))
-console.log(blah)
 
 
 });
