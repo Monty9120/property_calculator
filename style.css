@@ -78,22 +78,18 @@ tr:nth-child(even)
 	position: fixed;
 	top: 0;
 	left: 30%;
-	/*transition: all ease 0.3s;*/
 }
 #refresh:hover{
 	background: white;
 }
  
 .wrap{
-	margin-right: 5%;
 }
 
 .pure-control-group{
-	/*position: relative;*/
 }
 
 .loan{
-	/*margin-left: 2em;*/
 }
 .pure-form {
 	display: flex;

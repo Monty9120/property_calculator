@@ -482,13 +482,6 @@ var cellNetCashflow = $('.r-net-cashflow');
  console.log(interestRate)
  var interestRateFn = ((Math.pow(1+interestRate,1/26)-1) *100).toFixed(2);
 
-console.log('Hi');
-console.log(interestRateFn)
-
-
-
-
-
 
 
 
@@ -551,13 +544,16 @@ console.log('ipmt: ' + ipmt)
 var ppmt = (PPMT((Math.pow(1+interestRate,1/26)-1),1,+paymentsLoan,+loanAmountValue,0,0))
 console.log('ppmt: ' + ppmt);
 
-// $('.r-int').html(ppmt);
+
+
+
 var fortnight = 0;
 var fortnight2 = 1;
 var cellInt = $('.r-int');
 var cellPrincipal = $('.r-raw-principal')
 cellPrincipal.html('1');
 
+//Get annual INterest. Loop through raw data get sum
 var annualInterest2Sum = 0;
 var principal2Sum = 0;
 while(cellInt.length>0){
@@ -575,11 +571,10 @@ while(cellInt.length>0){
 
 	cellInt = cellInt.next();
 	cellPrincipal = cellPrincipal.next();
-
 	
 }
-console.log(annualInterest2Sum.toFixed(2))
-console.log(principal2Sum.toFixed(2))
+
+
 
 
 $('.r-annual-interest2').html(annualInterest2Sum.toFixed(0));
@@ -599,7 +594,6 @@ while (principalCell.length>0) {
 	var principalValue = principalCell.html();
 
 	loanCell.html(loanPrevValue+ principalValue)
-	console.log(loanPrevValue)
 
 
 
@@ -608,6 +602,26 @@ while (principalCell.length>0) {
 	prevLoanCell = prevLoanCell.next();
 
 }
+
+
+
+//Annual Interest Loop -	-	-	-	-	-	-	-	-	-	-	-	-	
+var annualIntCell2 = $('.r-annual-interest2');
+
+while (annualIntCell2.length>0) {
+
+	var change = 132;
+
+	annualIntCell2.html((+annualInterest2Sum+ change))
+	annualIntCell2 = annualIntCell2.next();
+}
+
+
+
+
+
+
+
 
 //P Total Expenses 
 var principalValue = principalCell.html();
