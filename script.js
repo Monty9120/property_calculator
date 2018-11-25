@@ -463,11 +463,31 @@ var cellNetCashflow = $('.r-net-cashflow');
 
 
 
-	//Cattelss Depr
+	//Chattelss Depr
 	var chattelsInput = $('#chattels').val().replace(/,/g, '');
 	var depreciationRateInput = $('#depreciation-rate').val()/100;
 	var chattelsOutput  = (chattelsInput*depreciationRateInput)*-1;
 	$('.r-chattels-depr').html(chattelsOutput);
+	$('.r-depr-rem').html(+chattelsInput + +chattelsOutput);
+
+	//Get cells
+	var cellChattels = $('.r-chattels-depr');
+	var cellDeprRem = $('.r-depr-rem');
+	var cellDeprPrev = cellDeprRem.prev();
+	
+
+	
+
+	while(cellChattels.length>0){
+		cellDeprRemVal = cellDeprRem.html();
+		
+		sum = (+cellDeprRemVal * +depreciationRateInput)
+		cellChattels.html(sum)
+
+		cellChattels = cellChattels.next();
+		cellDeprRem = cellDeprRem.next();
+	
+	}
 
 
 
@@ -546,14 +566,16 @@ console.log('ppmt: ' + ppmt);
 
 
 
-
+//Get Annual Interest and Principal Raw Data. Loop through raw data and get sum.
+//Need to figure out how to get sum of every 16 cells and place into each cell.
 var fortnight = 0;
 var fortnight2 = 1;
-var cellInt = $('.r-int');
+var cellInt = $('.r-raw-int');
+
 var cellPrincipal = $('.r-raw-principal')
+
 cellPrincipal.html('1');
 
-//Get annual INterest. Loop through raw data get sum
 var annualInterest2Sum = 0;
 var principal2Sum = 0;
 while(cellInt.length>0){
@@ -573,48 +595,92 @@ while(cellInt.length>0){
 	cellPrincipal = cellPrincipal.next();
 	
 }
-
-
-
-
 $('.r-annual-interest2').html(annualInterest2Sum.toFixed(0));
 $('.r-principal').html(principal2Sum.toFixed(0));
 
 
-var pLoanBalance = (loanAmountValue + principal2Sum).toFixed(0);
-$('.r-loan-balance').html(pLoanBalance)
+///sum 26 thingy ANNUAL INTEREST
+var annualInterst2 = $('.r-annual-interest2');
+var rawData = $('.rawdata>td').not('.table-heading');
 
+
+var outerIndex = 0;
+while(annualInterst2.length>0){
+	var sum26 = 0;
+
+	var start = outerIndex *26;
+	var end = start + 25;
+	outerIndex++;
+	for(var i=start;i<=end;i++){
+		sum26 += parseFloat(rawData[i].innerHTML);
+	}
+
+	annualInterst2.html(sum26.toFixed(0));
+	annualInterst2 = annualInterst2.next();
+
+}
+
+///sum 26 thingy PRINICPAL
+var prinicpal2 = $('.r-principal2');
+var rawData = $('.rawdata-principal>td').not('.table-heading');
+
+
+var outerIndex = 0;
+while(prinicpal2.length>0){
+	var sum26 = 0;
+
+	var start = outerIndex *26;
+	var end = start + 25;
+	outerIndex++;
+	for(var i=start;i<=end;i++){
+		sum26 += parseFloat(rawData[i].innerHTML);
+	}
+
+	prinicpal2.html(sum26.toFixed(0));
+	prinicpal2 = prinicpal2.next();
+
+}
+
+
+
+///---------------------
 
 var loanCell = $('.r-loan-balance').next();
 var prevLoanCell = loanCell.prev();
-var principalCell = $('.r-principal');
+var principalCell = $('.r-principal2');
+var principalValue = principalCell.html()
+
+var pLoanBalance = (+loanValue + +principalValue);
+$('.r-loan-balance').html(pLoanBalance)
+
+console.log(loanValue)
+
+
 while (principalCell.length>0) {
 
 	var loanPrevValue = prevLoanCell.html();
-	var principalValue = principalCell.html();
+	var principalValue = principalCell.next().html();
 
-	loanCell.html(loanPrevValue+ principalValue)
-
-
+	loanCell.html((+loanPrevValue + +principalValue).toFixed(0))
 
 	loanCell = loanCell.next();
 	principalCell = principalCell.next();
 	prevLoanCell = prevLoanCell.next();
-
 }
 
 
 
 //Annual Interest Loop -	-	-	-	-	-	-	-	-	-	-	-	-	
-var annualIntCell2 = $('.r-annual-interest2');
+// var annualIntCell2 = $('.r-annual-interest2');
 
-while (annualIntCell2.length>0) {
+// while (annualIntCell2.length>0) {
+// 	//next cell contains 
+// 	var change = 132;
 
-	var change = 132;
+// 	annualIntCell2.html((+annualInterest2Sum))
 
-	annualIntCell2.html((+annualInterest2Sum+ change))
-	annualIntCell2 = annualIntCell2.next();
-}
+// 	annualIntCell2 = annualIntCell2.next();
+// }
 
 
 
@@ -628,9 +694,69 @@ var principalValue = principalCell.html();
 var pTotalExpenses = (+principal2Sum + +annualInterest2Sum - +annualCost).toFixed(0)
 $('.r-total-expenses2').html(pTotalExpenses);
 
+
+//prinicpal + annual interest - annualcosts
+var cellTotalExpenses = $('.r-total-expenses2');
+//Cells we need value of
+var cellAnnualCost= $('.r-annual-costs');
+var principalCell = $('.r-principal2');
+var annualInterst2 = $('.r-annual-interest2');
+
+
+while(cellTotalExpenses.length>0){
+	//values
+	var annualCostVal = cellAnnualCost.text();
+	var principalVal = principalCell.text();
+	var annualInterestVal = annualInterst2.text();
+
+
+	sum = (+principalVal + +annualInterestVal- +annualCostVal);
+	cellTotalExpenses.html(sum);
+
+	//Move cells accross
+	cellTotalExpenses=cellTotalExpenses.next();
+	cellAnnualCost=cellAnnualCost.next();
+	principalCell=principalCell.next();
+	annualInterst2=annualInterst2.next();
+
+}
+
+
 //P Gross Cashflow
 var pGrossCashflow = (+pTotalExpenses + +annualRentVal)
 $('.r-gross-cashflow2').html(pGrossCashflow);
+
+	//Gross Cashflow and Taxable Income
+	var grossCashflowVal = (+totalExpenses + +annualRentVal);
+
+	//define things you need value of
+	var cellAnnualRent = $('.r-annual-rent');
+	var cellTotalExpenses2 = $('.r-total-expenses2');
+	var cellGrossCashflow = $('.r-gross-cashflow2');
+
+
+
+	while(cellGrossCashflow.length>0){
+		//get value of cells
+		var annualRentCellValue = cellAnnualRent.html();
+		var totalExpensesCellValue = cellTotalExpenses2.html();
+	
+
+		var grossCashflowVal = (+totalExpensesCellValue + +annualRentCellValue).toFixed(0);
+		var chattelsOutput  = (chattelsInput*depreciationRateInput)*-1;
+
+		//Gross cashflow html
+		cellGrossCashflow.html(+grossCashflowVal);
+	
+
+		cellTotalExpenses2 = cellTotalExpenses2.next();
+		cellGrossCashflow = cellGrossCashflow.next();
+		cellAnnualRent = cellAnnualRent.next();
+	
+
+}
+
+
 
 
 //P Taxable Income
@@ -682,6 +808,7 @@ var cellLoanBalance = $('.r-loan-balance');
 
 
 	}
+
 	
 // Equity Percentage and ROI
 
@@ -745,9 +872,14 @@ var cellNetCashflow = $('.r-net-cashflow2');
 // 	}
 	
 
+
 });
+$('.pdf-download').on('click',function(e){
+				e.preventDefault();
 
 
+		        window.print();
+		    });
 
 //default test:
 $('#property-value').val('200,000');
@@ -765,7 +897,7 @@ $('#loan-term').val('25');
 $('#rental-income').val('300');
 $('#property-management').val('8.5');
 $('#annual-vaccancy').val('2');
-$('#chattels').val('0');
+$('#chattels').val('500');
 $('#depreciation-rate').val('18');
 $('#capital-growth').val('4.6');
 $('#rental-increase').val('3');
