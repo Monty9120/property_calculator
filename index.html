@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" href="style.css">
+	<link type="text/css" media="print" rel="stylesheet" href="print.css">
 	<link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
 </head>
 <body>
@@ -13,6 +14,7 @@
 
 
 	<div class="wrap">
+	<div class="form">
 		<h1 class="center">Enter your data here</h1>
 		<form class="pure-form pure-form-aligned">
 
@@ -141,14 +143,14 @@
 
 
 			</form>
-
+		</div>
 			<button id="refresh">Refresh</button> 
 
 			<div class="results-table">
 				<div class="table">
 				<table>
 					<thead>
-						<h1>Results</h1>
+						<h1>Results for: <span class="address-output"></span></h1>
 					</thead>
 					<tbody>
 						<tr class="years">
@@ -167,6 +169,8 @@
 							<td class="year">12</td>
 							<td class="year">13</td>
 							<td class="year">14</td>
+							<td class="year">15</td>
+
 						</tr>
 						<tr>
 							<td class="table-heading">Property Value</td>
@@ -183,6 +187,7 @@
 							<td>$328,004</td>
 							<td>$343,092</td>
 							<td>$358,874</td>
+							<td>$375,382</td>
 							<td>$375,382</td>
 						</tr>
 
@@ -208,6 +213,8 @@
 							<td>12</td>
 							<td>13</td>
 							<td>14</td>
+							<td>15</td>
+
 						</tr>
 						<tr class="weekly-rent">
 							<td class="table-heading">Weekly Rent</td>
@@ -225,6 +232,7 @@
 							<td>$415</td>
 							<td>$428</td>
 							<td>$441</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Annual Rent</td>
@@ -242,6 +250,7 @@
 							<td>$20,159</td>
 							<td>$20,764</td>
 							<td>$21,386</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Property Mangt</td>
@@ -259,6 +268,7 @@
 							<td>$1,713</td>
 							<td>$1,765</td>
 							<td>$1,818</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Rates & Water</td>
@@ -276,6 +286,7 @@
 							<td>$1,107</td>
 							<td>$1,141</td>
 							<td>$1,175</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Body Corporate</td>
@@ -293,6 +304,7 @@
 							<td>$0</td>
 							<td>$0</td>
 							<td>$0</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Insurance</td>
@@ -310,6 +322,7 @@
 							<td>$415</td>
 							<td>$428</td>
 							<td>$441</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Maintenance</td>
@@ -327,6 +340,7 @@
 							<td>$1,038</td>
 							<td>$1,069</td>
 							<td>$1,101</td>
+							<td></td>
 						</tr>
 						<tr>
 							<td class="table-heading">Annual Costs</td>
@@ -344,6 +358,7 @@
 							<td>$4,326</td>
 							<td>$4,456</td>
 							<td>$4,589</td>
+							<td></td>
 						</tr>
 					</table>
 				</div>
@@ -367,6 +382,7 @@
 						<td class="year">12</td>
 						<td class="year">13</td>
 						<td class="year">14</td>
+						<td class="year">15</td>
 					</tr>
 					<tr>
 						<td class="table-heading">Annual Interest</td>
@@ -384,6 +400,7 @@
 						<td>($8,400)</td>
 						<td>($8,400)</td>
 						<td>($8,400)</td>
+						<td></td>
 					</tr>
 					<tr>
 
@@ -402,6 +419,7 @@
 						<td>($12,726)</td>
 						<td>($12,856)</td>
 						<td>($12,989)</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Gross Cashflow</td>
@@ -419,40 +437,42 @@
 						<td>$8,038</td>
 						<td>$8,531</td>
 						<td>$9,039</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Chattels Depr</td>
-						<td class="r-chattels-depr">$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
+						<td class="r-chattels-depr">0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
 					</tr>
-                    <tr>
+                    <tr class="hide">
                         <td class="table-heading">Depr Rem (hide)</td>
-                        <td class="r-depr-rem">$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td>$0</td>
-                        <td></td>
+                        <td class="r-depr-rem">410</td>
+                        <td>336</td>
+                        <td>276</td>
+                        <td>226</td>
+                        <td>185</td>
+                        <td>152</td>
+                        <td>125</td>
+                        <td>102</td>
+                        <td>84</td>
+                        <td>69</td>
+                        <td>56</td>
+                        <td>46</td>
+                        <td>38</td>
+                        <td>31</td>
                         <td></td>
                     </tr>
 					<tr>
@@ -471,6 +491,7 @@
 						<td>$8,038</td>
 						<td>$8,531</td>
 						<td>$9,039</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Tax/Rebate</td>
@@ -488,6 +509,7 @@
 						<td>($2,411)</td>
 						<td>($2,559)</td>
 						<td>($2,712)</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Net Cashflow</td>
@@ -505,6 +527,7 @@
 						<td>$5,626</td>
 						<td>$5,972</td>
 						<td>$6,327</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td>&nbsp;</td>
@@ -523,6 +546,7 @@
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
 						<td>&nbsp;</td>
+
 					</tr>
 					<tr>
 						<td class="table-heading">Equity</td>
@@ -540,6 +564,7 @@
 						<td>$223,092</td>
 						<td>$238,874</td>
 						<td>$255,382</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Equity %</td>
@@ -557,6 +582,7 @@
 						<td>65.02%</td>
 						<td>66.56%</td>
 						<td>68.03%</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">ROI After Tax*</td>
@@ -574,10 +600,12 @@
 						<td>9.96%</td>
 						<td>9.75%</td>
 						<td>9.56%</td>
+						<td></td>
 					</tr>
 					<tr class="capital-return-sum">
 						<td class="hide">Return on capital sum</td>
 						<td class="r-return-capital-sum"></td>
+						<td></td>
 						<td></td>
 						<td></td>
 						<td></td>
@@ -608,6 +636,7 @@
 						<td>264%</td>
 						<td>294%</td>
 						<td>326%</td>
+						<td></td>
 					</tr>
 
 				</table>
@@ -631,6 +660,7 @@
 						<td class="year">12</td>
 						<td class="year">13</td>
 						<td class="year">14</td>
+						<td class="year">15</td>
 					</tr>
 					<tr>
 						<td class="table-heading">Annual Interest</td>
@@ -648,6 +678,7 @@
 						<td>($5,972)</td>
 						<td>($5,693)</td>
 						<td>($5,394)</td>
+						<td></td>
 					</tr>
                     <!-- Data Cell -->
                     <tr class="rawdata hide">
@@ -1455,6 +1486,7 @@
 						<td>($3,993)</td>
 						<td>($4,273)</td>
 						<td>($4,572)</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Loan Balance</td>
@@ -1472,6 +1504,7 @@
 						<td>$86,061</td>
 						<td>$81,788</td>
 						<td>$77,216</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Total Expenses</td>
@@ -1489,6 +1522,7 @@
 						<td>($14,292)</td>
 						<td>($14,421)</td>
 						<td>($14,555)</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Gross Cashflow</td>
@@ -1506,23 +1540,25 @@
 						<td>$6,472</td>
 						<td>$6,965</td>
 						<td>$7,473</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Chattels Depr</td>
-						<td class="chattels-depr2">$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
-						<td>$0</td>
+						<td class="r-chattels-depr">0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td>0</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Taxable Income</td>
@@ -1540,6 +1576,7 @@
 						<td>$10,465</td>
 						<td>$11,238</td>
 						<td>$12,045</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Tax/Rebate</td>
@@ -1557,6 +1594,7 @@
 						<td>($3,140)</td>
 						<td>($3,371)</td>
 						<td>($3,614)</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Net Cashflow</td>
@@ -1574,6 +1612,7 @@
 						<td>$3,332</td>
 						<td>$3,594</td>
 						<td>$3,859</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Equity</td>
@@ -1591,6 +1630,7 @@
 						<td>$257,031</td>
 						<td>$277,086</td>
 						<td>$298,166</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Equity %</td>
@@ -1608,6 +1648,7 @@
 						<td>74.92%</td>
 						<td>77.21%</td>
 						<td>79.43%</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">ROI After Tax*</td>
@@ -1625,6 +1666,7 @@
 						<td>9.42%</td>
 						<td>9.20%</td>
 						<td>9.00%</td>
+						<td></td>
 					</tr>
 					<tr>
 						<td class="table-heading">Return on capital**</td>
@@ -1642,6 +1684,7 @@
 						<td>177%</td>
 						<td>190%</td>
 						<td>203%</td>
+						<td></td>
 					</tr>
 				</tbody>
 				</div>
@@ -1649,7 +1692,7 @@
 
 
 		</div>
-        <a class="pdf-download" href="#">Download as pdf</a>
+        <div class="download"><a class="pdf-download" href="#">Download as pdf</a></div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="numeral/numeral.js"></script>

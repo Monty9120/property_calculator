@@ -1,5 +1,5 @@
 $(function(){
-	console.log('jquery test')
+
 
 
 	$('.currency').mask('000,000,000', {reverse: true});
@@ -17,11 +17,19 @@ $(function(){
 // })
 if($('tr:contains("5")')){
 	$(this).addClass('red');
-	console.log(this)
+
 }
 
 
+
+
+
 $('#refresh').on('click',function(){
+	var address = $('#address').val();
+	$('.address-output').html(address);
+
+
+
 	//Caclulate Property Value
 
 	var propertyValueCell = $('.r-property-value');
@@ -153,7 +161,7 @@ $('#refresh').on('click',function(){
 		//Increase
 		var bodyCorpCell = $('.r-body-corp');
 		
-		console.log(bodyCorp);
+
 			
 
 		while(bodyCorpCell.next().length>0){
@@ -187,12 +195,12 @@ $('#refresh').on('click',function(){
 	var propertyMangCellVal = $('.r-property-mangt').html();
 	var bodyCorpCell = $('.r-body-corp').html();
 	var annualCost = parseFloat((+maintenanceCellVal + +insuranceCellVal + +bodyCorpCell + +ratesCellVal + +propertyMangCellVal));
-	// console.log('Annual Cost: ' +annualCost)
-	// console.log('Insurance Value: ' + insuranceCellVal)
-	// console.log('Property Mangt: ' + propertyMangCellVal)
-	// console.log('Body Corp: '+bodyCorpCell)
-	// console.log('Rates: '+ ratesCellVal)
-	// console.log('Maintenance: '+maintenanceCellVal)
+
+
+
+
+
+
 	var annualCostResult = $('.r-annual-costs').text(annualCost);
 
 	
@@ -273,6 +281,41 @@ $('#refresh').on('click',function(){
 		}
 
 
+	//Chattelss Depr
+	var chattelsInput = $('#chattels').val().replace(/,/g, '');
+	var depreciationRateInput = $('#depreciation-rate').val()/100;
+	var chattelsOutput  = (chattelsInput*depreciationRateInput)*-1;
+
+
+	// $('.r-chattels-depr').html(chattelsOutput);
+	$('.r-depr-rem').html(+chattelsInput + +chattelsOutput);
+
+	//Get cells
+	var cellChattels = $('.r-chattels-depr');
+	var cellDep = $('.r-depr-rem');
+
+
+	var currentChattelsValue = chattelsInput;
+
+	while(cellChattels.length>0){
+
+		cellChattels.html(chattelsOutput);
+
+		currentChattelsValue = +currentChattelsValue + chattelsOutput;
+
+		cellDep.html(currentChattelsValue);
+
+		chattelsOutput = -(depreciationRateInput * +currentChattelsValue).toFixed(0);
+
+		cellChattels = cellChattels.next();
+		cellDep = cellDep.next();
+
+	}
+
+
+
+
+
 
 
 	//Gross Cashflow and Taxable Income
@@ -284,13 +327,14 @@ $('#refresh').on('click',function(){
 	var cellGrossCashflow = $('.r-gross-cashflow');
 
 	var cellTaxableIncome = $('.r-taxable-income');
-
+	var cellChattels = $('.r-chattels-depr')
 
 	while(cellGrossCashflow.length>0){
 		//get value of cells
 		var annualRentCellValue = cellAnnualRent.html();
 		var totalExpensesCellValue = cellTotalExpenses2.html();
 		var taxableIncomeCellValue = cellTaxableIncome.html();
+		var cellChattelsValue = cellChattels.html();
 	
 
 		var grossCashflowVal = (+totalExpensesCellValue + +annualRentCellValue).toFixed(0);
@@ -301,19 +345,20 @@ $('#refresh').on('click',function(){
 		//Gross cashflow html
 		cellGrossCashflow.html(+grossCashflowVal);
 		//TaxableIncome html
-		cellTaxableIncome.html(+ (+totalExpensesCellValue + +annualRentCellValue + 0).toFixed(0));
+		cellTaxableIncome.html(+ (+totalExpensesCellValue + +annualRentCellValue + +cellChattelsValue).toFixed(0));
 	
 
 		cellTotalExpenses2 = cellTotalExpenses2.next();
 		cellGrossCashflow = cellGrossCashflow.next();
 		cellAnnualRent = cellAnnualRent.next();
 		cellTaxableIncome = cellTaxableIncome.next();
+		cellChattels = cellChattels.next();
 	
 
 }
 
 	
-
+//Tax/Rebate
 var cellTaxRebate = $('.r-tax-rebate')
 var cellTaxableIncome = $('.r-taxable-income');
 
@@ -387,6 +432,16 @@ var cellRoi = $('.r-roi');
 var cellNetCashflow = $('.r-net-cashflow');
 
 
+var equityCellValue = cellEquity.html();
+var propertyValueCellValue = cellPropertyValue.html();
+var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+var netCashflowValue = cellNetCashflow.html();
+var prevCellEquityValue = prevCellEquity.html();
+
+
+var roiFirstSum = ((((+equityCellValue + +netCashflowValue)/(+deposit + +capitalCosts)-1)*100).toFixed(2) +'%');
+
+
 	while(cellEquity.length>0){
 
 		//Get values of related cells
@@ -396,12 +451,21 @@ var cellNetCashflow = $('.r-net-cashflow');
 		var netCashflowValue = cellNetCashflow.html();
 		var prevCellEquityValue = prevCellEquity.html();
 
-		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2)+'%');
 
+
+
+
+
+
+
+
+
+	
+	
 
 		cellRoi.html(((((+equityCellValue + +netCashflowValue) / +prevCellEquityValue)-1)*100).toFixed(2)+'%');
-
-
+		
+		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2)+'%');
 
 
 
@@ -414,7 +478,7 @@ var cellNetCashflow = $('.r-net-cashflow');
 
 
 	}
-
+	$('.r-roi').html(roiFirstSum);
 
 	// Return on Capital sum-	-	-	-	-	-
 
@@ -463,31 +527,6 @@ var cellNetCashflow = $('.r-net-cashflow');
 
 
 
-	//Chattelss Depr
-	var chattelsInput = $('#chattels').val().replace(/,/g, '');
-	var depreciationRateInput = $('#depreciation-rate').val()/100;
-	var chattelsOutput  = (chattelsInput*depreciationRateInput)*-1;
-	$('.r-chattels-depr').html(chattelsOutput);
-	$('.r-depr-rem').html(+chattelsInput + +chattelsOutput);
-
-	//Get cells
-	var cellChattels = $('.r-chattels-depr');
-	var cellDeprRem = $('.r-depr-rem');
-	var cellDeprPrev = cellDeprRem.prev();
-	
-
-	
-
-	while(cellChattels.length>0){
-		cellDeprRemVal = cellDeprRem.html();
-		
-		sum = (+cellDeprRemVal * +depreciationRateInput)
-		cellChattels.html(sum)
-
-		cellChattels = cellChattels.next();
-		cellDeprRem = cellDeprRem.next();
-	
-	}
 
 
 
@@ -499,7 +538,7 @@ var cellNetCashflow = $('.r-net-cashflow');
  var paymentsLoan = parseFloat(paymentsPerYear * +loanTerm);
 
  var interestRate = annualInterestVal/100;
- console.log(interestRate)
+
  var interestRateFn = ((Math.pow(1+interestRate,1/26)-1) *100).toFixed(2);
 
 
@@ -551,23 +590,13 @@ function PPMT (rate, per, nper, pv, fv, type) {
     return pmt - ipmt;
 }
 
-
-
-console.log('rate:' + interestRateFn)
-console.log('loan: ' + loanAmountValue)
-console.log('payments loan ' +paymentsLoan)
-
 var pmt = (PMT((Math.pow(1+interestRate,1/26)-1), +paymentsLoan , +loanAmountValue,0,0)).toFixed(2);
-console.log('pmt: ' + pmt)
 var ipmt = (IPMT(+loanAmountValue, pmt, (Math.pow(1+interestRate,1/26)-1), 1)).toFixed(2);
-console.log('ipmt: ' + ipmt)
 var ppmt = (PPMT((Math.pow(1+interestRate,1/26)-1),1,+paymentsLoan,+loanAmountValue,0,0))
-console.log('ppmt: ' + ppmt);
 
 
 
 //Get Annual Interest and Principal Raw Data. Loop through raw data and get sum.
-//Need to figure out how to get sum of every 16 cells and place into each cell.
 var fortnight = 0;
 var fortnight2 = 1;
 var cellInt = $('.r-raw-int');
@@ -653,7 +682,7 @@ var principalValue = principalCell.html()
 var pLoanBalance = (+loanValue + +principalValue);
 $('.r-loan-balance').html(pLoanBalance)
 
-console.log(loanValue)
+
 
 
 while (principalCell.length>0) {
@@ -667,26 +696,6 @@ while (principalCell.length>0) {
 	principalCell = principalCell.next();
 	prevLoanCell = prevLoanCell.next();
 }
-
-
-
-//Annual Interest Loop -	-	-	-	-	-	-	-	-	-	-	-	-	
-// var annualIntCell2 = $('.r-annual-interest2');
-
-// while (annualIntCell2.length>0) {
-// 	//next cell contains 
-// 	var change = 132;
-
-// 	annualIntCell2.html((+annualInterest2Sum))
-
-// 	annualIntCell2 = annualIntCell2.next();
-// }
-
-
-
-
-
-
 
 
 //P Total Expenses 
@@ -722,7 +731,7 @@ while(cellTotalExpenses.length>0){
 }
 
 
-//P Gross Cashflow
+//P Gross Cashflow 
 var pGrossCashflow = (+pTotalExpenses + +annualRentVal)
 $('.r-gross-cashflow2').html(pGrossCashflow);
 
@@ -758,28 +767,91 @@ $('.r-gross-cashflow2').html(pGrossCashflow);
 
 
 
+//P Taxable Income 
+var cellTaxableIncome2 = $('.r-taxable-income2');
+//define things you need value of
+var cellAnnualRent = $('.r-annual-rent');
+var cellAnnualCost= $('.r-annual-costs');
+var cellAnnualInterest2 = $('.r-annual-interest2');
+var cellChattels = $('.r-chattels-depr');
 
-//P Taxable Income
-var pTaxableIncome = (+annualRentVal + +annualInterest2Sum + 0 - +annualCost);
-$('.r-taxable-income2').html(pTaxableIncome);
 
-//P TaxRebate
-var pTaxRebate = ((pTaxableIncome * marginalTaxRate) *-1).toFixed(0);
-$('.r-tax-rebate2').html(pTaxRebate);
+	while(cellTaxableIncome2.length>0){
+		//get value of cells
+		var annualRentCellValue = cellAnnualRent.html();
+		var annualInterest2Value = cellAnnualInterest2.html();
+		var annualCostValue = cellAnnualCost.html();
+		var chattelsValue = cellChattels.html();
 
 
-//Net Cashflow
-var pNetCashflow = (+pGrossCashflow + +pTaxRebate);
-$('.r-net-cashflow2').html(pNetCashflow);
+		var sum = (+annualRentCellValue + +annualInterest2Value + +chattelsValue) - +annualCostValue
+		
+
+		//TaxableIncome html
+		cellTaxableIncome2.html(sum);
+
+		cellTaxableIncome2 = cellTaxableIncome2.next();
+		cellAnnualRent = cellAnnualRent.next();
+		cellChattels = cellChattels.next();
+		cellAnnualInterest2 = cellAnnualInterest2.next();
+		cellAnnualCost = cellAnnualCost.next();
+
+
+	}
+
+//Tax/Rebate2
+var cellTaxRebate = $('.r-tax-rebate2')
+var cellTaxableIncome = $('.r-taxable-income2');
+
+
+	while (cellTaxRebate.length>0) {
+		var taxableIncomeCellValue = cellTaxableIncome.html();
+
+		//TaxRebate Calcs
+		var taxableIncomeVal = (+totalExpenses + +chattelsOutput + +annualRentVal)
+		var marginalTaxRate = $('#marginal-tax-rate').val()/100;
+		
+		cellTaxRebate.html(+((+taxableIncomeCellValue* +marginalTaxRate)*-1).toFixed(0))
+
+		cellTaxableIncome = cellTaxableIncome.next();
+		cellTaxRebate = cellTaxRebate.next();
+
+
+	}
+
+
+
+
+//Net Cashflow2
+
+var cellTaxRebate = $('.r-tax-rebate2')
+var cellGrossCashflow = $('.r-gross-cashflow2');
+var cellNetCashflow = $('.r-net-cashflow2');
+
+	while (cellTaxRebate.length>0) {
+		//Get values of related cells
+		var grossCashflowCellValue = cellGrossCashflow.html();
+		var taxRebateCellValue = cellTaxRebate.html();
+
+
+		
+		cellNetCashflow.html(+((+grossCashflowCellValue + +taxRebateCellValue)).toFixed(0))
+
+		cellGrossCashflow = cellGrossCashflow.next();
+		cellTaxRebate = cellTaxRebate.next();
+		cellNetCashflow = cellNetCashflow.next();
+
+
+	}
 
 //Equity
 var cellPropertyValue = $('.r-property-value');
 var pEquity = (+cellPropertyValue.html() - +pLoanBalance);
-console.log('p equity: ' +pEquity);
+
 $('.r-equity2').html(pEquity);
 //Equity %
 var pEquityPercent = (+pEquity / +cellPropertyValue.html())
-console.log('p equity%: ' +pEquityPercent);
+
 
 //P Roi after tax
 
@@ -820,6 +892,14 @@ var cellEquityPercent = $('.r-equity-percent2');
 var cellRoi = $('.r-roi-2');
 var cellNetCashflow = $('.r-net-cashflow2');
 
+var equityCellValue = cellEquity.html();
+var propertyValueCellValue = cellPropertyValue.html();
+var capitalCosts = $('#capital-costs').val().replace(/,/g, '');
+var netCashflowValue = cellNetCashflow.html();
+var prevCellEquityValue = prevCellEquity.html();
+
+
+var roiFirstSum = ((((+equityCellValue + +netCashflowValue)/(+deposit + +capitalCosts)-1)*100).toFixed(2) +'%');
 
 	while(cellEquity.length>0){
 
@@ -830,10 +910,9 @@ var cellNetCashflow = $('.r-net-cashflow2');
 		var netCashflowValue = cellNetCashflow.html();
 		var prevCellEquityValue = prevCellEquity.html();
 
-		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2)+'HI');
+		cellEquityPercent.html(((+equityCellValue/ +propertyValueCellValue)*100).toFixed(2)+'%');
 
-
-		cellRoi.html(((((+equityCellValue + +netCashflowValue) / +prevCellEquityValue)-1)*100).toFixed(2)+'hi');
+		cellRoi.html(((((+equityCellValue + +netCashflowValue) / +prevCellEquityValue)-1)*100).toFixed(2)+'%');
 
 
 
@@ -848,30 +927,7 @@ var cellNetCashflow = $('.r-net-cashflow2');
 
 
 	}
-
-
-//Get Cells
-// var cellEquity = $('.r-equity');
-// var cellPropertyValue = $('.r-property-value');
-
-
-// 	while(cellEquity.length>0){
-
-// 		//Get values of related cells
-// 		var propertyValueCellValue = cellPropertyValue.html();
-// 		var loanAmountValue = (purchasePrice-deposit);
-
-		//Add value into cell
-// 		cellEquity.html(+ +(propertyValueCellValue-loanAmountValue).toFixed(0));
-
-		//Go to next cells
-// 		cellEquity = cellEquity.next();
-// 		cellPropertyValue = cellPropertyValue.next();
-
-
-// 	}
-	
-
+$('.r-roi-2').html(roiFirstSum);
 
 });
 $('.pdf-download').on('click',function(e){
@@ -882,6 +938,7 @@ $('.pdf-download').on('click',function(e){
 		    });
 
 //default test:
+$('#address').val('123, Fake Street, Te Aro, Wellington')
 $('#property-value').val('200,000');
 $('#purchase-price').val('200,000');
 $('#deposit').val('80,000');
@@ -890,6 +947,7 @@ $('#rates').val('800');
 $('#body-corporate').val('0');
 $('#insurance').val('300');
 $('#maintenance-underten').val('5');
+$('#maintenance-overten').val('5')
 $('#water').val('0');
 $('#annual-interest-rate').val('7');
 

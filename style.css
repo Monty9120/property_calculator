@@ -26,6 +26,9 @@ h1{
 h2{
 
 }
+.address-output{
+	color: tomato;
+}
 i{
 	position: absolute;
 	left:100px;
@@ -44,6 +47,19 @@ tr:nth-child(even)
 	{
 		background-color: #f2f2f2;
 	}
+.download{
+	width: 100%;
+	text-align: center;
+	margin: 4em 0;
+}
+.pdf-download{
+	padding: 1em;
+	text-align: center;
+	font-size: 2em;
+	background-color: tomato;
+	color: white;
+	
+}
 
 .table{
 	overflow-x: auto !important;
