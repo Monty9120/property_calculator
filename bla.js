@@ -898,12 +898,7 @@ $(function() {
         }
         $('.r-roi-2').html(roiFirstSum);
 
-        //format currency    
-        $('[data-format="currency"]>td').not(':first-child').each(function(i,el){
-        	el.innerHTML = accounting.formatMoney(parseFloat(el.innerHTML));
-        });
-
-    });//end of refresh
+    });
     $('.pdf-download').on('click', function(e) {
         e.preventDefault();
 

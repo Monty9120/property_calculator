@@ -56,9 +56,14 @@ tr:nth-child(even)
 	padding: 1em;
 	text-align: center;
 	font-size: 2em;
+	color: tomato;
+	border:1px tomato solid;
+	transition: all ease 0.5s;
+	
+}
+.pdf-download:hover{
 	background-color: tomato;
 	color: white;
-	
 }
 
 .table{
