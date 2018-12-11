@@ -43,16 +43,11 @@ $(function() {
 
 
         //Calculate Increase
-
-
         while (propertyValueCell.length > 0) {
             propertyValueValue += propertyValueValue * capitalGrowth;
             propertyValueCell = propertyValueCell.next();
             propertyValueCell.text((propertyValueValue).toFixed(0));
         }
-
-
-
 
         //Calculate annual rent 
         var purchasePrice = $('#purchase-price').val().replace(/,/g, '');
@@ -462,8 +457,6 @@ $(function() {
         $('.r-roi').html(roiFirstSum);
 
         // Return on Capital sum-	-	-	-	-	-
-
-
         var cellSum = $('.r-return-capital-sum');
         cellGrossCash = $('.r-gross-cashflow');
         //var deposit
@@ -853,8 +846,6 @@ $(function() {
 
 
         // Equity Percentage and ROI
-
-
         var cellEquity = $('.r-equity2');
         var prevCellEquity = $('.r-equity2').prev();
         var cellPropertyValue = $('.r-property-value');
@@ -935,11 +926,6 @@ $(function() {
     $('#rental-increase').val('3');
     $('#cost-increases').val('3');
     $('#marginal-tax-rate').val('30');
-
-
-
-
-    console.log(accounting.formatMoney(1232142))
 
 
 

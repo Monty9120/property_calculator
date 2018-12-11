@@ -1,9 +1,7 @@
 .red{
 	color: red;
 }
-body{
-	/*overflow-x: hidden;*/
-}
+
 fieldset{
 	padding:1em;
 }
@@ -36,13 +34,11 @@ i{
 }
 tr, td{
 	border:1px grey solid;
-	padding: 10px;
+	padding: 2px;
 	transition: all ease 1s;
 
 }
-td{
-	
-}
+
 tr:nth-child(even) 
 	{
 		background-color: #f2f2f2;
@@ -78,7 +74,7 @@ tr:nth-child(even)
 }
 
 .results-table td{
-	padding: 1em;
+	padding: 10px;
 
 }
 .years{
@@ -96,9 +92,7 @@ tr:nth-child(even)
 	width: 40%;
 	display: flex;
 	justify-content: center;
-	position: fixed;
-	top: 0;
-	left: 30%;
+	
 }
 #refresh:hover{
 	background: white;
@@ -113,9 +107,16 @@ tr:nth-child(even)
 .loan{
 }
 .pure-form {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 
 }
@@ -124,10 +125,10 @@ tr:nth-child(even)
 	border:1px black solid !important;
 	margin: 1em !important;
 	flex: 1 0 40%;
-	/*text-align: center;*/
 	padding: 1em !important;
 	display: flex;
 	justify-content: center;
+	flex-wrap: wrap;
 }
 
 

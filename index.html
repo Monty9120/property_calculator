@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Property Calculator</title>
 	<link rel="stylesheet" href="style.css">
 	<link type="text/css" media="print" rel="stylesheet" href="print.css">
@@ -25,17 +26,17 @@
 				</div>
 
 				<div class="pure-control-group">
-					<label for="property-value">Property Value</label>
+					<label for="property-value">Property Value ($)</label>
 					<input class="currency" id="property-value" type="text" placeholder="$200,000">
 				</div>
 				<div class="pure-control-group">
-					<label for="purchase-price">Purchase Price </label>
+					<label for="purchase-price">Purchase Price ($)</label>
 					<input class="currency" id="purchase-price" type="text" placeholder="$200,000">
 				</div>
 
 
 				<div class="pure-control-group">
-					<label for="deposit">Deposit</label>
+					<label for="deposit">Deposit ($)</label>
 					<input class="currency" id="deposit" type="text" placeholder="$80,000">
 
 				</div>
@@ -44,39 +45,39 @@
 
 
 				<div class="pure-control-group">
-					<label for="capital-costs">Capital Costs</label>
+					<label for="capital-costs">Capital Costs ($)</label>
 					<input class="currency" id="capital-costs" type="text" placeholder="$0">
 				</div>
 			</fieldset>
 
 			<fieldset>
 				<div class="pure-control-group">
-					<label for="rates">Rates</label>
+					<label for="rates">Rates ($)</label>
 					<input class="currency" id="rates" type="text" placeholder="$800">pa
 				</div>
 
 				<div class="pure-control-group">
-					<label for="body-corporate">Body Coporate</label>
+					<label for="body-corporate">Body Coporate ($)</label>
 					<input class="currency" id="body-corporate" type="text" placeholder="$0">pa
 				</div>
 
 				<div class="pure-control-group">
-					<label for="insurance">Insurance</label>
+					<label for="insurance">Insurance ($)</label>
 					<input class="currency" id="insurance" type="text" placeholder="$300">pa
 				</div>
 
 				<div class="pure-control-group">
-					<label for="maintenance-underten">Maintenance (<10 years)</label>
+					<label for="maintenance-underten">Maintenance (%)(<10 years)</label>
 						<input id="maintenance-underten" type="" placeholder="%5">pa
 					</div>
 
 					<div class="pure-control-group">
 						<label for="maintenance-overten">Maintenance (>10 years)</label>
-						<input id="maintenance-overten" type="" placeholder="%5">pa
+						<input id="maintenance-overten" type="" placeholder="%5">% pa
 					</div>
 
 					<div class="pure-control-group">
-						<label for="water">Water</label>
+						<label for="water">Water ($)</label>
 						<input class="currency" id="water" type="text" placeholder="$0">pa
 					</div>
 
@@ -95,7 +96,7 @@
 
 				<fieldset>
 					<div class="pure-control-group">
-						<label for="rental-income">Rental Income</label>
+						<label for="rental-income">Rental Income ($)</label>
 						<input class="currency" id="rental-income" type="text" placeholder="$300">
 					</div>
 					<div class="pure-control-group">
@@ -110,12 +111,12 @@
 
 				<fieldset>
 					<div class="pure-control-group">
-						<label for="chattels">Chattels Valuation</label>
+						<label for="chattels">Chattels Valuation ($)</label>
 						<input class="currency" id="chattels" type="text" placeholder="$0">
 					</div>
 					<div class="pure-control-group">
 						<label for="depreciation-rate">Depreciation Rate</label>
-						<input id="depreciation-rate" type="text" placeholder="18%">
+						<input id="depreciation-rate" type="text" placeholder="18%">%
 					</div>
 				</fieldset>
 
@@ -135,7 +136,7 @@
 					</div>
 					<div class="pure-control-group">
 						<label for="marginal-tax-rate">Marginal Tax Rate</label>
-						<input id="marginal-tax-rate" type="text" placeholder="30%">
+						<input id="marginal-tax-rate" type="text" placeholder="30%">%
 					</div>
 
 				</fieldset>
@@ -678,7 +679,7 @@
 						<td>($5,394)</td>
 						<td></td>
 					</tr>
-                    <!-- Data Cell -->
+                    <!-- Data Cells for Prinicpal -->
                     <tr class="rawdata hide" >
                         <td class="table-heading">Int RawData</td>
                         <td class="r-raw-int">($8,069)</td>
@@ -1692,8 +1693,8 @@
 		</div>
         <div class="download"><a class="pdf-download" href="#">Download as pdf</a></div>
 	</div>
+	<!-- scripts -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="numeral/numeral.js"></script>
 	<script src="currency.min.js"></script>
 	<script src="jQuery-Mask/dist/jquery.mask.js"></script>
 	<script src="accounting.js"></script>
