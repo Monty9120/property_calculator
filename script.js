@@ -14,16 +14,6 @@ $(function() {
 
     });
 
-    // $( window ).scroll(function(){
-    // 	$('.table-heading').addClass('fixed')
-    // })
-    if ($('tr:contains("5")')) {
-        $(this).addClass('red');
-
-    }
-
-
-
 
     $('#refresh').on('click', function() {
         var address = $('#address').val();
@@ -110,21 +100,27 @@ $(function() {
 
             var cellAnualRent = $('.r-annual-rent');
             var maintenanceCell = $('.r-maintenance');
+            var overTenCell = $('.overten')
 
             while (maintenanceCell.length > 0) {
                 var annualRentCellValue = cellAnualRent.html();
-
-                if (maintenanceCell.length > 10) {
-                    var maintenanceResultVal = parseFloat(+annualRentCellValue * (+maintenanceValOver10 / 100)).toFixed(0);
+   
+                if (maintenanceCell.hasClass('overten')) {
+                    var maintenanceResultValOver = parseFloat(+annualRentCellValue * (+maintenanceValOver10 / 100)).toFixed(0);
+                    maintenanceCell.text(+ +maintenanceResultValOver);
                 } else {
-                    var maintenanceResultVal = parseFloat(+annualRentCellValue * (+maintenanceValUnder10 / 100)).toFixed(0);
-
+                    var maintenanceResultValUnder = parseFloat(+annualRentCellValue * (+maintenanceValUnder10 / 100)).toFixed(0);
+                    maintenanceCell.text(+ +maintenanceResultValUnder);
                 }
 
-                maintenanceCell.text(+ +maintenanceResultVal);
+                
                 maintenanceCell = maintenanceCell.next();
                 cellAnualRent = cellAnualRent.next();
             }
+
+              
+
+
 
 
         }
@@ -889,10 +885,23 @@ $(function() {
         }
         $('.r-roi-2').html(roiFirstSum);
 
-        //format currency    
+
+
+
+
+        //format currency and make negatives red  
         $('[data-format="currency"]>td').not(':first-child').each(function(i,el){
         	el.innerHTML = accounting.formatMoney(parseFloat(el.innerHTML));
+
+            if (el.innerHTML.includes('-')) {
+                $(this).addClass('red')
+  
+                $(this).prepend('(').append(')')
+            }
         });
+
+
+
 
     });//end of refresh
     $('.pdf-download').on('click', function(e) {
