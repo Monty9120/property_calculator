@@ -886,6 +886,66 @@ $(function() {
         $('.r-roi-2').html(roiFirstSum);
 
 
+        // Return on Capital sums 2-   -   -   -   -   -
+        var cellSum = $('.r-return-capital2-sum');
+        var cellSum2 = $('.r-return-capital2-sum2')
+        cellPrincipal = $('.r-principal2');
+        cellNetCashflow2 = $('.r-net-cashflow2')
+        
+        var sum = 0;
+        var sum2 = 0;
+        while (cellSum.length > 0) {
+
+            var cellPrincipalValue = cellPrincipal.html();
+            var netCashCellValue = cellNetCashflow2.html();
+
+            sum += parseFloat(cellPrincipalValue);
+            sum2 += parseFloat(netCashCellValue);
+            cellSum.html(sum);
+            cellSum2.html(sum2);
+
+            cellSum = cellSum.next();
+            cellSum2 = cellSum2.next();
+            cellPrincipal = cellPrincipal.next();
+            cellNetCashflow2 = cellNetCashflow2.next();
+
+        }
+
+        // Return on Capital -   -   -   -   -   -
+
+        var cellEquity = $('.r-equity2');
+        var cellNetCashflow = $('.r-net-cashflow2');
+        var cellReturnCapital2 = $('.r-return-capital2');
+        var cellSum = $('.r-return-capital2-sum');
+        var cellSum2 = $('.r-return-capital2-sum2');
+        //var deposit
+        while (cellReturnCapital2.length > 0) {
+            var equityCellValue = cellEquity.html();
+            var grossCashflowCellValue = cellNetCashflow.html();
+            var nextgrossCashFlow = cellNetCashflow.next().html();
+            var cellSumValue = cellSum.html();
+            var cellSumValue2 = cellSum2.html();
+
+
+            //CALCULATION FOR SECOND RETURN ON CAPITAL:
+            let thing = ((equityCellValue - +deposit)/(+deposit + +cellSumValue2))
+            let testSum = (+cellSumValue + (thing)/100)
+            console.log(testSum)
+            var firstHalf = ((+cellSumValue2) + (+equityCellValue - +deposit))
+            var secondHalf = ((+deposit + (+cellSumValue *-1)))
+
+            cellReturnCapital2.html(((+firstHalf / +secondHalf)*100).toFixed(0)+'%');
+
+            
+            cellEquity = cellEquity.next();
+            cellNetCashflow = cellNetCashflow.next();
+            cellSum = cellSum.next();
+            cellSum2 = cellSum2.next();
+            cellReturnCapital2 = cellReturnCapital2.next();
+
+        }
+
+
 
 
 
@@ -897,6 +957,8 @@ $(function() {
                 $(this).addClass('red')
   
                 $(this).prepend('(').append(')')
+            }else{
+                $(this).removeClass('red')
             }
         });
 
@@ -929,7 +991,7 @@ $(function() {
     $('#rental-income').val('300');
     $('#property-management').val('8.5');
     $('#annual-vaccancy').val('2');
-    $('#chattels').val('500');
+    $('#chattels').val('0');
     $('#depreciation-rate').val('18');
     $('#capital-growth').val('4.6');
     $('#rental-increase').val('3');
