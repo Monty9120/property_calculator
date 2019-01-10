@@ -930,7 +930,7 @@ $(function() {
             //CALCULATION FOR SECOND RETURN ON CAPITAL:
             let thing = ((equityCellValue - +deposit)/(+deposit + +cellSumValue2))
             let testSum = (+cellSumValue + (thing)/100)
-            console.log(testSum)
+      
             var firstHalf = ((+cellSumValue2) + (+equityCellValue - +deposit))
             var secondHalf = ((+deposit + (+cellSumValue *-1)))
 
@@ -943,15 +943,109 @@ $(function() {
             cellSum2 = cellSum2.next();
             cellReturnCapital2 = cellReturnCapital2.next();
 
+            // console.log(cellReturnCapital2.html());
+
         }
 
 
 
 
+        // -    -   -   -   -   -   -   - CHARTS -    -   -   -   -   -   -
 
-        //format currency and make negatives red  
+        var cellLoanBalance = $('.r-loan-balance');
+        var dataLoan = [
+            cellLoanBalance.html(),
+            cellLoanBalance.nextAll().html(),
+            cellLoanBalance.nextAll().eq(1).html(),
+            cellLoanBalance.nextAll().eq(2).html(),
+            cellLoanBalance.nextAll().eq(3).html(),
+            cellLoanBalance.nextAll().eq(4).html( ),
+            cellLoanBalance.nextAll().eq(5).html(),
+            cellLoanBalance.nextAll().eq(6).html(),
+            cellLoanBalance.nextAll().eq(7).html(),
+            cellLoanBalance.nextAll().eq(8).html(),
+            cellLoanBalance.nextAll().eq(9).html(),
+            cellLoanBalance.nextAll().eq(10).html(),
+            cellLoanBalance.nextAll().eq(11).html(),
+            cellLoanBalance.nextAll().eq(12).html(),
+            cellLoanBalance.nextAll().eq(13).html(),
+            cellLoanBalance.nextAll().eq(14).html(),
+        ]
+  
+        var propertyValueCell = $('.r-property-value');
+        var dataPropertyValue = [
+            propertyValueCell.html(),
+            propertyValueCell.nextAll().html(),
+            propertyValueCell.nextAll().eq(1).html(),
+            propertyValueCell.nextAll().eq(2).html(),
+            propertyValueCell.nextAll().eq(3).html(),
+            propertyValueCell.nextAll().eq(4).html(),
+            propertyValueCell.nextAll().eq(5).html(),
+            propertyValueCell.nextAll().eq(6).html(),
+            propertyValueCell.nextAll().eq(7).html(),
+            propertyValueCell.nextAll().eq(8).html(),
+            propertyValueCell.nextAll().eq(9).html(),
+            propertyValueCell.nextAll().eq(10).html(),
+            propertyValueCell.nextAll().eq(11).html(),
+            propertyValueCell.nextAll().eq(12).html(),
+            propertyValueCell.nextAll().eq(13).html(),
+            propertyValueCell.nextAll().eq(14).html(),
+        ]
+
+        var cellEquity = $('.r-equity');
+        var dataEquity = [
+            cellEquity.html(),
+            cellEquity.nextAll().html(),
+            cellEquity.nextAll().eq(1).html(),
+            cellEquity.nextAll().eq(2).html(),
+            cellEquity.nextAll().eq(3).html(),
+            cellEquity.nextAll().eq(4).html(),
+            cellEquity.nextAll().eq(5).html(),
+            cellEquity.nextAll().eq(6).html(),
+            cellEquity.nextAll().eq(7).html(),
+            cellEquity.nextAll().eq(8).html(),
+            cellEquity.nextAll().eq(9).html(),
+            cellEquity.nextAll().eq(10).html(),
+            cellEquity.nextAll().eq(11).html(),
+            cellEquity.nextAll().eq(12).html(),
+            cellEquity.nextAll().eq(13).html(),
+            cellEquity.nextAll().eq(14).html(),
+        ]
+        
+
+
+
+        var ctx = $("#myChart");
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels:["y1", "y2", "y3", "y4", "y5", "y6", "y7", "y8", "y9", "y10", "y11", "y12", "y13", "y14", "y15"],
+                datasets:[
+                    {
+                        label: "Loan",
+                        data: dataLoan,
+                        backgroundColor: 'rgba(100,200,200,0.5)',
+                    },
+                    {
+                        label: "Property Value",
+                        data: dataPropertyValue,
+                        backgroundColor: 'rgba(200,100,100,0.5)',
+                    },
+                    {
+                        label: "Equity (Interest Only)",
+                        data: dataEquity,
+                        backgroundColor: 'rgba(100,100,200,0.5)',
+                    },
+                ]
+            },
+            // options: options
+        });
+
+
+
+    //format currency and make negatives red  
         $('[data-format="currency"]>td').not(':first-child').each(function(i,el){
-        	el.innerHTML = accounting.formatMoney(parseFloat(el.innerHTML));
+            el.innerHTML = accounting.formatMoney(parseFloat(el.innerHTML));
 
             if (el.innerHTML.includes('-')) {
                 $(this).addClass('red')
@@ -962,9 +1056,6 @@ $(function() {
             }
         });
 
-
-
-
     });//end of refresh
     $('.pdf-download').on('click', function(e) {
         e.preventDefault();
@@ -972,6 +1063,9 @@ $(function() {
 
         window.print();
     });
+
+
+
 
     //default test:
     $('#address').val('123, Fake Street, Te Aro, Wellington')
@@ -997,6 +1091,14 @@ $(function() {
     $('#rental-increase').val('3');
     $('#cost-increases').val('3');
     $('#marginal-tax-rate').val('30');
+
+
+
+
+
+
+
+
 
 
 
